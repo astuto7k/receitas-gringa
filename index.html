@@ -141,6 +141,22 @@
             margin-bottom: 20px;
         }
 
+        .comparison-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .highlight-text {
+            font-weight: bold;
+            color: #ffcccc;
+        }
+
+        .highlight-text-good {
+            font-weight: bold;
+            color: #ffe0b2;
+        }
+
         .comparison-col ul {
             list-style: none;
             padding: 0;
@@ -734,6 +750,11 @@
                 border-radius: 8px;
             }
 
+            .comparison-desc {
+                font-size: 0.72rem;
+                margin-bottom: 10px;
+            }
+
             .comparison-col ul li {
                 font-size: 0.72rem;
                 padding: 4px 0;
@@ -812,9 +833,10 @@
     <section class="hero">
         <div class="container">
             <div class="hero-text">
-                <h1>Volte a comer pão, doces e suas comidas favoritas sem culpa — e pare de viver com medo dos picos de glicose no sangue</h1>
-                <p>Aprenda a fazer receitas fáceis, rápidas e baratas — sem farinha e sem açúcar.</p>
-                <a href="#compra" class="cta-btn">Quero fazer receitas deliciosas</a>
+                <span style="font-weight: 700; color: #D4851C; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px;">Para Pessoas com Diabetes, Resistência à Insulina ou Restrições Alimentares:</span>
+                <h1>Volte a comer pães, doces e suas sobremesas favoritas sem culpa — e pare de viver com o medo constante dos picos de glicose.</h1>
+                <p>Descubra como preparar receitas deliciosas, rápidas e baratas — com sabor de verdade, mas 100% livres de farinha de trigo e açúcar refinado.</p>
+                <a href="#compra" class="cta-btn">QUERO COMER DOCES SEM CULPA AGORA</a>
             </div>
             <div class="hero-image">
                 <img src="images/chef_patricia.png" alt="Chef Patrícia - Clean Sweets">
@@ -827,45 +849,28 @@
         <div class="container">
             <div class="comparison-grid">
                 <div class="comparison-col bad-col">
-                    <h2>Receitas Saudáveis Comuns</h2>
+                    <h2>A Frustração das Receitas "Saudáveis"</h2>
                     <img src="images/f1.jpg" alt="Receitas comuns que decepcionam">
+                    <p class="comparison-desc">Você gasta dinheiro com ingredientes caros, segue a receita da internet ao pé da letra, espera com expectativa na frente do forno e o resultado é uma decepção:</p>
                     <ul>
-                        <li>Pudim que fica aguado e ralo</li>
-                        <li>Chocolate com gosto amargo e granuloso</li>
-                        <li>Cookies duros como pedra</li>
-                        <li>Cupcakes secos por dentro</li>
-                        <li>Fudge de caramelo sem consistência</li>
-                        <li>Pudim de banana sem cremosidade</li>
-                        <li>Donuts que ficam massudos e solados</li>
-                        <li>Brownies com textura borrachuda</li>
+                        <li>Pudins aguados e sem sabor.</li>
+                        <li>Cookies duros como pedra que vão para o lixo.</li>
+                        <li>Brownies com textura de borracha and gosto amargo.</li>
+                        <li>Cupcakes secos por dentro.</li>
                     </ul>
-                    <div class="comparison-bottom comparison-left-bottom">
-                        <p><strong>E a pior parte…</strong></p>
-                        <p>Você segue a receita ao pé da letra</p>
-                        <p>Gasta dinheiro com ingredientes caros</p>
-                        <p>Espera com expectativa</p>
-                        <p>E o resultado é uma decepção.</p>
-                    </div>
+                    <p class="comparison-desc highlight-text">O problema não é você. É que a maioria das receitas saudáveis ignora a química exata da umidade na hora do preparo.</p>
                 </div>
                 <div class="comparison-col good-col">
-                    <h2>Minha Técnica Especializada</h2>
+                    <h2>A Técnica Parisiense "Sem-Farinha"</h2>
                     <img src="images/f2.jpg" alt="Resultados perfeitos com a minha técnica">
+                    <p class="comparison-desc">Com os ajustes certos na estrutura da massa, o resultado muda completamente:</p>
                     <ul>
-                        <li>Pudim com aquela textura sedosa perfeita</li>
-                        <li>Chocolate rico, brilhante e cremoso</li>
-                        <li>Cookies macios por dentro</li>
-                        <li>Cupcakes úmidos e fofinhos</li>
-                        <li>Fudge de caramelo com consistência de verdade</li>
-                        <li>Pudim de banana consistente e aveludado</li>
-                        <li>Donuts dourados e crocantes por fora</li>
-                        <li>Brownies cremosos que derretem na boca</li>
+                        <li>Pudins com aquela textura sedosa e perfeita.</li>
+                        <li>Pães de forma e baguetes com miolo macio de verdade.</li>
+                        <li>Brownies e bolos cremosos que derretem na boca.</li>
+                        <li>Cookies perfeitamente macios por dentro.</li>
                     </ul>
-                    <div class="comparison-bottom comparison-right-bottom">
-                        <p><strong>E ninguém percebe que é:</strong></p>
-                        <div class="check-item">Sem farinha</div>
-                        <div class="check-item">Sem açúcar</div>
-                        <p class="note-text">Porque simplesmente tem gosto de sobremesa normal.</p>
-                    </div>
+                    <p class="comparison-desc highlight-text-good">E o melhor de tudo: Ninguém da sua família vai perceber que é sem farinha e sem açúcar. Simplesmente tem o sabor da sobremesa tradicional que todo mundo ama.</p>
                 </div>
             </div>
         </div>
@@ -999,12 +1004,10 @@
                 <img src="images/chef_patricia.png" alt="Chef Patrícia">
             </div>
             <div class="who-text">
-                <h2>Quem Sou Eu</h2>
-                <p>Sou a Chef Patrícia, reconhecida internacionalmente como uma das melhores confeiteiras do mundo e pioneira na panificação saudável.</p>
-                <p>Mas a minha história mudou quando fui diagnosticada com resistência à insulina e intolerância à lactose. De repente, tudo o que eu amava — pães, doces, sobremesas — parecia proibido. Tentei receitas "saudáveis" e só encontrei texturas secas e sabores sem graça.</p>
-                <p><strong>Eu me recusei a aceitar que o saudável precisasse ter gosto ruim.</strong></p>
-                <p>Hoje moro em Paris, onde aperfeiçoei técnicas para recriar o miolo real, a umidade e o sabor original — sem glúten, sem farinha, sem adição de açúcar e sem lactose.</p>
-                <p>Este aplicativo nasceu dessa decisão: voltar a saborear o que você ama, sem abrir mão de nada.</p>
+                <h2>Quem Sou Eu e Por Que Criei Isso</h2>
+                <p>Sou a Chef Patrícia, confeiteira apaixonada e pioneira na panificação saudável. Minha história mudou quando fui diagnosticada com resistência à insulina. De repente, tudo o que eu amava — pães, doces, sobremesas — parecia proibido.</p>
+                <p>Tentei as receitas recomendadas e só encontrei texturas secas e sabores deprimentes. Eu me recusei a aceitar que cuidar da saúde precisasse ter gosto ruim.</p>
+                <p>Foi então que aperfeiçoei técnicas de confeitaria para recriar a maciez, a umidade e o sabor original — sem glúten, sem farinha e sem adição de açúcar. A Biblioteca Clean Sweet nasceu para devolver a você o prazer de comer o que ama, sem se sentir diferente e sem abrir mão de nada.</p>
             </div>
         </div>
     </section>
@@ -1013,16 +1016,14 @@
     <section class="app-benefits">
         <div class="container">
             <div class="app-text">
-                <h2>Clean Sweet APP</h2>
+                <h2>Apresentando: A Biblioteca Digital Clean Sweet</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #555;">Mais de 500 receitas organizadas, testadas e à prova de falhas. É como um caderno de receitas inteligente: você acessa imediatamente pelo seu celular, tablet ou computador — sem precisar baixar nenhum aplicativo complicado.</p>
                 <ul>
-                    <li>Coma doces sem culpa</li>
-                    <li>Tenha tamanhos de porções claros</li>
-                    <li>Entenda os carboidratos de forma simples</li>
-                    <li>Reduza picos desnecessários de glicose</li>
-                    <li>Mantenha o ritual cultural (café + sobremesa)</li>
-                    <li>Coma com sua família sem se sentir "o doente"</li>
+                    <li>Coma doces sem culpa e mantenha o ritual em família.</li>
+                    <li>Tenha tamanhos de porções claros com a Calculadora Integrada.</li>
+                    <li>Lista de compras automática para facilitar sua rotina no mercado.</li>
                 </ul>
-                <a href="#compra" class="cta-btn">Quero fazer receitas deliciosas</a>
+                <a href="#compra" class="cta-btn">QUERO MEU ACESSO AGORA</a>
             </div>
             <div class="app-phone">
                 <img src="images/CELULAR.png" alt="Aplicativo Clean Sweet no celular">
@@ -1062,7 +1063,7 @@
                     <img src="images/B1.png" alt="Receita do Chá Dourado">
                     <div class="bonus-info">
                         <h3>A receita do chá dourado que pode reduzir a glicose no sangue em jejum em até 40 pontos em menos de 14 dias.</h3>
-                        <p class="bonus-price">$9,90</p>
+                        <p class="bonus-price">R$ 9,90</p>
                         <p class="bonus-free">GRÁTIS!</p>
                     </div>
                 </div>
@@ -1070,7 +1071,7 @@
                     <img src="images/B2.png" alt="Lista Negra de Medicamentos">
                     <div class="bonus-info">
                         <h3>A lista negra de medicamentos e suplementos que mais aumentam a glicose no sangue — e que a maioria das pessoas toma sem saber…</h3>
-                        <p class="bonus-price">$9,90</p>
+                        <p class="bonus-price">R$ 9,90</p>
                         <p class="bonus-free">GRÁTIS!</p>
                     </div>
                 </div>
@@ -1078,7 +1079,7 @@
                     <img src="images/B33.png" alt="Receitas Metabólicas">
                     <div class="bonus-info">
                         <h3>Receitas Metabólicas que ajudam a reduzir a inflamação e auxiliam na perda de peso</h3>
-                        <p class="bonus-price">$19,90</p>
+                        <p class="bonus-price">R$ 19,90</p>
                         <p class="bonus-free">GRÁTIS!</p>
                     </div>
                 </div>
@@ -1100,15 +1101,16 @@
                     <span class="label">Segundos</span>
                 </div>
             </div>
-            <h3>Volte a Comer Sem Medo</h3>
-            <h2>Clean Sweet App</h2>
+            <h3>Apresentando: A Biblioteca Digital Clean Sweet</h3>
+            <h2>Clean Sweet</h2>
             <div class="price-box">
-                <p class="price-old">$69,90</p>
-                <p class="price-new">$ 27</p>
-                <p class="price-note">Pague apenas uma vez hoje:</p>
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #555;">Hoje, o acesso vitalício à Biblioteca Clean Sweet não custará os R$ 69,90 normais.</p>
+                <p class="price-old">R$ 69,90</p>
+                <p class="price-new">R$ 19,00</p>
+                <p class="price-note">Acesso imediato e vitalício. Sem mensalidades. Pague apenas uma vez hoje:</p>
                 <ul class="offer-list">
-                    <li>Aplicativo com mais de 400 receitas para diabéticos</li>
-                    <li>Atualizações constantes</li>
+                    <li>Mais de 500 receitas organizadas e testadas</li>
+                    <li>Acesso imediato pelo celular, tablet ou computador</li>
                     <li>Calculadora de porções integrada</li>
                     <li>Lista de compras automática</li>
                     <li>Bônus: Receitas Metabólicas</li>
@@ -1140,7 +1142,7 @@
                 <div class="faq-question">É um pagamento único ou uma assinatura?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        É um <strong>pagamento único de $27</strong>. Não há mensalidades. Sem renovações automáticas. Sem taxas ocultas. Você paga uma vez e o acesso é seu.
+                        É um <strong>pagamento único de R$ 19,00</strong>. Não há mensalidades. Sem renovações automáticas. Sem taxas ocultas. Você paga uma vez e o acesso é seu.
                     </div>
                 </div>
             </div>
