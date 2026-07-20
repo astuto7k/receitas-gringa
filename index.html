@@ -93,12 +93,12 @@
         }
 
         .hero-image {
-            flex: 0 0 440px;
+            flex: 0 0 500px;
             text-align: center;
         }
 
         .hero-image img {
-            max-height: 480px;
+            max-height: 540px;
             border-radius: 12px;
             width: 100%;
             height: auto;
@@ -159,23 +159,15 @@
 
         .comparison-col img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
             border-radius: 12px;
             margin-bottom: 20px;
-        }
-
-        .comparison-desc {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
         }
 
         .comparison-col ul {
             list-style: none;
             padding: 0;
-            flex-grow: 1;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .comparison-col ul li {
@@ -186,11 +178,6 @@
             gap: 8px;
         }
 
-        .comparison-col ul li::before {
-            flex-shrink: 0;
-            font-size: 1rem;
-        }
-
         .bad-col ul li::before {
             content: '😞';
         }
@@ -199,26 +186,39 @@
             content: '✅';
         }
 
-        .comparison-bottom-box {
+        .comparison-bottom {
             background: rgba(255, 255, 255, 0.08);
             border-radius: 12px;
-            padding: 20px;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            padding: 20px 30px;
             margin-top: auto;
+        }
+
+        .comparison-bottom p {
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .comparison-left-bottom p::before {
+            content: '👉 ';
+        }
+
+        .check-item {
             display: flex;
             align-items: center;
-            min-height: 110px;
-            box-sizing: border-box;
+            gap: 8px;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
         }
 
-        .comparison-bottom-box.bad-bottom {
-            color: #ffcccc;
+        .check-item::before {
+            content: '✅';
+            color: #4CAF50;
         }
 
-        .comparison-bottom-box.good-bottom {
-            color: #ffe0b2;
-            font-weight: bold;
+        .note-text {
+            margin-top: 12px !important;
+            font-size: 0.85rem !important;
+            opacity: 0.8;
         }
 
         /* EASY RECIPES */
@@ -770,7 +770,7 @@
             }
 
             .hero-image img {
-                max-width: 340px;
+                max-width: 400px;
                 width: 100%;
                 height: auto;
             }
@@ -780,48 +780,8 @@
             }
 
             .comparison-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-
-            .comparison-col {
-                padding: 12px;
-                border-radius: 12px;
-            }
-
-            .comparison-col h2 {
-                font-size: 0.85rem;
-                margin-bottom: 10px;
-                line-height: 1.2;
-            }
-
-            .comparison-col img {
-                height: 120px;
-                margin-bottom: 10px;
-                border-radius: 8px;
-            }
-
-            .comparison-desc {
-                font-size: 0.72rem;
-                margin-bottom: 10px;
-            }
-
-            .comparison-col ul li {
-                font-size: 0.72rem;
-                padding: 4px 0;
-                gap: 4px;
-            }
-
-            .comparison-col ul li::before {
-                font-size: 0.8rem;
-            }
-
-            .comparison-bottom-box {
-                padding: 12px 10px;
-                margin-top: 15px;
-                border-radius: 8px;
-                font-size: 0.72rem;
-                min-height: 140px;
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
 
             .easy-recipes .container {
@@ -897,7 +857,6 @@
             <div class="hero-text">
                 <h1>Volte a comer pães, doces e suas sobremesas favoritas sem culpa — e pare de viver com o medo constante dos picos de glicose.</h1>
                 <p>Descubra como preparar receitas deliciosas, rápidas e baratas — com sabor de verdade, mas 100% livres de farinha de trigo e açúcar refinado.</p>
-                <a href="#compra" class="cta-btn">QUERO COMER DOCES SEM CULPA AGORA</a>
             </div>
             <div class="hero-image">
                 <img src="images/chef_patricia.png" alt="Chef Patrícia - Clean Sweets">
@@ -910,31 +869,44 @@
         <div class="container">
             <div class="comparison-grid">
                 <div class="comparison-col bad-col">
-                    <h2>A Frustração das Receitas "Saudáveis"</h2>
+                    <h2>Receitas Saudáveis Comuns</h2>
                     <img src="images/f1.jpg" alt="Receitas comuns que decepcionam">
-                    <p class="comparison-desc">Você gasta dinheiro com ingredientes caros, segue a receita da internet ao pé da letra, espera com expectativa na frente do forno e o resultado é uma decepção:</p>
                     <ul>
-                        <li>Pudins aguados e sem sabor.</li>
-                        <li>Cookies duros como pedra que vão para o lixo.</li>
-                        <li>Brownies com textura de borracha and gosto amargo.</li>
-                        <li>Cupcakes secos por dentro.</li>
+                        <li>Pudim que fica aguado e ralo</li>
+                        <li>Chocolate com gosto amargo e granuloso</li>
+                        <li>Cookies duros como pedra</li>
+                        <li>Cupcakes secos por dentro</li>
+                        <li>Fudge de caramelo sem consistência</li>
+                        <li>Pudim de banana sem cremosidade</li>
+                        <li>Donuts que ficam massudos e solados</li>
+                        <li>Brownies com textura borrachuda</li>
                     </ul>
-                    <div class="comparison-bottom-box bad-bottom">
-                        O problema não é você. É que a maioria das receitas saudáveis ignora a química exata da umidade na hora do preparo.
+                    <div class="comparison-bottom comparison-left-bottom">
+                        <p><strong>E a pior parte…</strong></p>
+                        <p>Você segue a receita ao pé da letra</p>
+                        <p>Gasta dinheiro com ingredientes caros</p>
+                        <p>Espera com expectativa</p>
+                        <p>E o resultado é uma decepção.</p>
                     </div>
                 </div>
                 <div class="comparison-col good-col">
-                    <h2>A Técnica Parisiense "Sem-Farinha"</h2>
+                    <h2>Minha Técnica Especializada</h2>
                     <img src="images/f2.jpg" alt="Resultados perfeitos com a minha técnica">
-                    <p class="comparison-desc">Com os ajustes certos na estrutura da massa, o resultado muda completamente:</p>
                     <ul>
-                        <li>Pudins com aquela textura sedosa e perfeita.</li>
-                        <li>Pães de forma e baguetes com miolo macio de verdade.</li>
-                        <li>Brownies e bolos cremosos que derretem na boca.</li>
-                        <li>Cookies perfeitamente macios por dentro.</li>
+                        <li>Pudim com aquela consistência macia e sedosa perfeita</li>
+                        <li>Chocolate rico, brilhante e cremoso.</li>
+                        <li>Biscoitos macios por dentro</li>
+                        <li>Cupcakes macios e fofinhos</li>
+                        <li>Fudge de caramelo com consistência perfeita</li>
+                        <li>Pudim de banana espesso e aveludado</li>
+                        <li>Donuts dourados e crocantes por fora</li>
+                        <li>Brownies macios e que derretem na boca</li>
                     </ul>
-                    <div class="comparison-bottom-box good-bottom">
-                        E o melhor de tudo: Ninguém da sua família vai perceber que é sem farinha e sem açúcar. Simplesmente tem o sabor da sobremesa tradicional que todo mundo ama.
+                    <div class="comparison-bottom comparison-right-bottom">
+                        <p><strong>E ninguém percebe que é:</strong></p>
+                        <div class="check-item">Sem farinha</div>
+                        <div class="check-item">Sem açúcar</div>
+                        <p class="note-text">Porque simplesmente tem gosto de sobremesa normal.</p>
                     </div>
                 </div>
             </div>
