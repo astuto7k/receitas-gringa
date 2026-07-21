@@ -1,9 +1,14 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clean Sweets - Coma Doces Sem Culpa</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Open+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,7 +21,7 @@
         }
 
         .alert-banner {
-            background-color: #e09f28;
+            background-color: #EFA10C;
             color: #fff;
             text-align: center;
             padding: 10px 20px;
@@ -55,8 +60,9 @@
         /* HERO */
         .hero {
             background: url('images/f1.jpg') center/cover no-repeat;
-            padding: 60px 0 40px;
+            padding: 60px 0 0px;
             position: relative;
+            z-index: 2;
         }
 
         .hero::before {
@@ -68,7 +74,7 @@
 
         .hero .container {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             display: flex;
             align-items: center;
             gap: 40px;
@@ -80,7 +86,7 @@
 
         .hero-text h1 {
             font-style: italic;
-            color: #D4851C;
+            color: #EFA10C;
             font-size: 2.4rem;
             line-height: 1.2;
             margin-bottom: 20px;
@@ -93,15 +99,19 @@
         }
 
         .hero-image {
-            flex: 0 0 500px;
+            flex: 0 0 540px;
             text-align: center;
+            margin-bottom: -110px;
+            position: relative;
+            z-index: 10;
         }
 
         .hero-image img {
-            max-height: 540px;
+            max-height: 600px;
             border-radius: 12px;
             width: 100%;
             height: auto;
+            display: block;
         }
 
         /* CTA BUTTON */
@@ -129,8 +139,10 @@
         /* COMPARISON */
         .comparison {
             background: #5C4033;
-            padding: 60px 0;
+            padding: 140px 0 60px;
             color: #fff;
+            position: relative;
+            z-index: 1;
         }
 
         .comparison-grid {
@@ -353,7 +365,7 @@
         .press-img {
             width: 100%;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             object-fit: cover;
         }
 
@@ -378,10 +390,12 @@
         .testimonials-slider::-webkit-scrollbar {
             height: 6px;
         }
+
         .testimonials-slider::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
         }
+
         .testimonials-slider::-webkit-scrollbar-thumb {
             background: #D4851C;
             border-radius: 10px;
@@ -393,7 +407,7 @@
             background: #faf7f2;
             border-radius: 16px;
             padding: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
@@ -767,12 +781,17 @@
             .hero-image {
                 flex: none;
                 width: 100%;
+                margin-bottom: -100px;
+                position: relative;
+                z-index: 10;
             }
 
             .hero-image img {
-                max-width: 400px;
+                max-width: 460px;
                 width: 100%;
                 height: auto;
+                margin: 0 auto;
+                display: block;
             }
 
             .hero-text h1 {
@@ -815,7 +834,7 @@
             .press-images {
                 grid-template-columns: 1fr;
                 gap: 16px;
-                max-width: 340px;
+                max-width: 500px;
                 margin: 20px auto;
             }
 
@@ -855,8 +874,10 @@
     <section class="hero">
         <div class="container">
             <div class="hero-text">
-                <h1>Volte a comer pães, doces e suas sobremesas favoritas sem culpa — e pare de viver com o medo constante dos picos de glicose.</h1>
-                <p>Descubra como preparar receitas deliciosas, rápidas e baratas — com sabor de verdade, mas 100% livres de farinha de trigo e açúcar refinado.</p>
+                <h1>Volte a comer pães, doces e suas sobremesas favoritas sem culpa e pare de viver com o medo constante
+                    dos picos de glicose.</h1>
+                <p>Descubra como preparar receitas deliciosas, rápidas e baratas com sabor de verdade, mas 100% livres
+                    de farinha de trigo e açúcar refinado.</p>
             </div>
             <div class="hero-image">
                 <img src="images/chef_patricia.png" alt="Chef Patrícia - Clean Sweets">
@@ -1031,7 +1052,7 @@
     <section class="social-proof">
         <div class="container">
             <h2>O que as pessoas estão dizendo</h2>
-            
+
             <div class="press-images">
                 <img src="images/newspaper_chef.jpg" alt="Le Journal Mondial - Chefe Patrícia" class="press-img">
                 <img src="images/hero_chef.jpg" alt="Chefe Premiada em Paris" class="press-img">
@@ -1043,125 +1064,145 @@
                     <!-- Card 1 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Achei que nunca mais comeria doces sem medo. Agora sei exatamente o quanto posso comer."</blockquote>
+                        <blockquote>"Achei que nunca mais comeria doces sem medo. Agora sei exatamente o quanto posso
+                            comer."</blockquote>
                         <p class="author">Laura M., São Paulo</p>
                     </div>
                     <!-- Card 2 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Me ajudou a entender que o problema não era só o açúcar. Aprendi a controlar minhas porções e reduzir picos de glicose."</blockquote>
+                        <blockquote>"Me ajudou a entender que o problema não era só o açúcar. Aprendi a controlar minhas
+                            porções e reduzir picos de glicose."</blockquote>
                         <p class="author">José R., Rio de Janeiro</p>
                     </div>
                     <!-- Card 3 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"A melhor parte é que minha família inteira come as mesmas coisas que eu. Não me sinto mais excluído nas sobremesas."</blockquote>
+                        <blockquote>"A melhor parte é que minha família inteira come as mesmas coisas que eu. Não me
+                            sinto mais excluído nas sobremesas."</blockquote>
                         <p class="author">Mariana G., Belo Horizonte</p>
                     </div>
                     <!-- Card 4 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Os pães são sensacionais. O miolo é fofinho e o sabor é exatamente igual ao tradicional. Minha glicose agradece!"</blockquote>
+                        <blockquote>"Os pães são sensacionais. O miolo é fofinho e o sabor é exatamente igual ao
+                            tradicional. Minha glicose agradece!"</blockquote>
                         <p class="author">Cláudio S., Porto Alegre</p>
                     </div>
                     <!-- Card 5 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Fazer pudim sem açúcar que não fica aguado parecia milagre. Essa técnica parisiense realmente funciona."</blockquote>
+                        <blockquote>"Fazer pudim sem açúcar que não fica aguado parecia milagre. Essa técnica parisiense
+                            realmente funciona."</blockquote>
                         <p class="author">Beatriz F., Curitiba</p>
                     </div>
                     <!-- Card 6 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Minha filha é diabética tipo 1 e sofria muito nas festas. Hoje faço os bolos e cookies para ela e ela ama de paixão."</blockquote>
+                        <blockquote>"Minha filha é diabética tipo 1 e sofria muito nas festas. Hoje faço os bolos e
+                            cookies para ela e ela ama de paixão."</blockquote>
                         <p class="author">Renata L., Campinas</p>
                     </div>
                     <!-- Card 7 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Comprei com receio, mas a lista de compras automática salvou minha rotina. Receitas deliciosas e práticas!"</blockquote>
+                        <blockquote>"Comprei com receio, mas a lista de compras automática salvou minha rotina. Receitas
+                            deliciosas e práticas!"</blockquote>
                         <p class="author">Fernando M., Brasília</p>
                     </div>
                     <!-- Card 8 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Perdi 6kg trocando os doces tradicionais pelos funcionais da biblioteca. O brownie de chocolate é indescritível."</blockquote>
+                        <blockquote>"Perdi 6kg trocando os doces tradicionais pelos funcionais da biblioteca. O brownie
+                            de chocolate é indescritível."</blockquote>
                         <p class="author">Juliana K., Salvador</p>
                     </div>
                     <!-- Card 9 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Finalmente voltei a comer pão de forma com café sem ver a glicose subir a 200. Estou muito mais feliz."</blockquote>
+                        <blockquote>"Finalmente voltei a comer pão de forma com café sem ver a glicose subir a 200.
+                            Estou muito mais feliz."</blockquote>
                         <p class="author">Arnaldo T., Florianópolis</p>
                     </div>
                     <!-- Card 10 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"A calculadora de porções ajuda demais a manter o equilíbrio. Muito fácil de usar no celular!"</blockquote>
+                        <blockquote>"A calculadora de porções ajuda demais a manter o equilíbrio. Muito fácil de usar no
+                            celular!"</blockquote>
                         <p class="author">Patrícia V., Recife</p>
                     </div>
                     <!-- Card 11 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"A receita de baguete saudável é crocante por fora e macia por dentro. Lembra os melhores pães que comi na França."</blockquote>
+                        <blockquote>"A receita de baguete saudável é crocante por fora e macia por dentro. Lembra os
+                            melhores pães que comi na França."</blockquote>
                         <p class="author">Gabriel H., Vitória</p>
                     </div>
                     <!-- Card 12 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Tenho restrição severa ao glúten e açúcar. Essa biblioteca foi a salvação para os meus finais de semana em família."</blockquote>
+                        <blockquote>"Tenho restrição severa ao glúten e açúcar. Essa biblioteca foi a salvação para os
+                            meus finais de semana em família."</blockquote>
                         <p class="author">Aline D., Goiânia</p>
                     </div>
                     <!-- Card 13 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Minha glicose de jejum caiu de 145 para 98 em menos de um mês usando as receitas. Super indico!"</blockquote>
+                        <blockquote>"Minha glicose de jejum caiu de 145 para 98 em menos de um mês usando as receitas.
+                            Super indico!"</blockquote>
                         <p class="author">Luiz C., Manaus</p>
                     </div>
                     <!-- Card 14 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"O cheesecake de frutas vermelhas virou a sobremesa oficial de domingo em casa. Ninguém diz que é sem açúcar."</blockquote>
+                        <blockquote>"O cheesecake de frutas vermelhas virou a sobremesa oficial de domingo em casa.
+                            Ninguém diz que é sem açúcar."</blockquote>
                         <p class="author">Camila P., Natal</p>
                     </div>
                     <!-- Card 15 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Fácil, rápido e realmente barato de fazer. Não precisa de ingredientes mirabolantes e caros."</blockquote>
+                        <blockquote>"Fácil, rápido e realmente barato de fazer. Não precisa de ingredientes mirabolantes
+                            e caros."</blockquote>
                         <p class="author">Ricardo J., Fortaleza</p>
                     </div>
                     <!-- Card 16 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Os cookies derretem na boca! Meus filhos adoraram e agora comem sobremesa saudável sem perceber."</blockquote>
+                        <blockquote>"Os cookies derretem na boca! Meus filhos adoraram e agora comem sobremesa saudável
+                            sem perceber."</blockquote>
                         <p class="author">Luciana O., Sorocaba</p>
                     </div>
                     <!-- Card 17 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Excelente material. O chá dourado regulou minha digestão e me deu muito mais energia no dia a dia."</blockquote>
+                        <blockquote>"Excelente material. O chá dourado regulou minha digestão e me deu muito mais
+                            energia no dia a dia."</blockquote>
                         <p class="author">Marcos R., Santos</p>
                     </div>
                     <!-- Card 18 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Parece mentira comer doce sem sentir culpa ou medo. A Chef Patrícia trouxe a confeitaria de Paris para nós."</blockquote>
+                        <blockquote>"Parece mentira comer doce sem sentir culpa ou medo. A Chef Patrícia trouxe a
+                            confeitaria de Paris para nós."</blockquote>
                         <p class="author">Sofia W., Niterói</p>
                     </div>
                     <!-- Card 19 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"O aplicativo no celular funciona perfeitamente. Uso direto na cozinha enquanto preparo as receitas."</blockquote>
+                        <blockquote>"O aplicativo no celular funciona perfeitamente. Uso direto na cozinha enquanto
+                            preparo as receitas."</blockquote>
                         <p class="author">Sônia G., Londrina</p>
                     </div>
                     <!-- Card 20 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
-                        <blockquote>"Melhor investimento para a minha saúde. Comer bem é viver melhor. Recomendo a todos os diabéticos!"</blockquote>
+                        <blockquote>"Melhor investimento para a minha saúde. Comer bem é viver melhor. Recomendo a todos
+                            os diabéticos!"</blockquote>
                         <p class="author">Valdir B., Joinville</p>
                     </div>
                 </div>
-                
+
                 <div class="slider-hint">👉 Arraste para o lado para ver mais depoimentos</div>
             </div>
         </div>
@@ -1175,9 +1216,14 @@
             </div>
             <div class="who-text">
                 <h2>Quem Sou Eu e Por Que Criei Isso</h2>
-                <p>Sou a Chef Patrícia, confeiteira apaixonada e pioneira na panificação saudável. Minha história mudou quando fui diagnosticada com resistência à insulina. De repente, tudo o que eu amava — pães, doces, sobremesas — parecia proibido.</p>
-                <p>Tentei as receitas recomendadas e só encontrei texturas secas e sabores deprimentes. Eu me recusei a aceitar que cuidar da saúde precisasse ter gosto ruim.</p>
-                <p>Foi então que aperfeiçoei técnicas de confeitaria para recriar a maciez, a umidade e o sabor original — sem glúten, sem farinha e sem adição de açúcar. A Biblioteca Clean Sweet nasceu para devolver a você o prazer de comer o que ama, sem se sentir diferente e sem abrir mão de nada.</p>
+                <p>Sou a Chef Patrícia, confeiteira apaixonada e pioneira na panificação saudável. Minha história mudou
+                    quando fui diagnosticada com resistência à insulina. De repente, tudo o que eu amava — pães, doces,
+                    sobremesas — parecia proibido.</p>
+                <p>Tentei as receitas recomendadas e só encontrei texturas secas e sabores deprimentes. Eu me recusei a
+                    aceitar que cuidar da saúde precisasse ter gosto ruim.</p>
+                <p>Foi então que aperfeiçoei técnicas de confeitaria para recriar a maciez, a umidade e o sabor original
+                    — sem glúten, sem farinha e sem adição de açúcar. A Biblioteca Clean Sweet nasceu para devolver a
+                    você o prazer de comer o que ama, sem se sentir diferente e sem abrir mão de nada.</p>
             </div>
         </div>
     </section>
@@ -1187,7 +1233,10 @@
         <div class="container">
             <div class="app-text">
                 <h2>Apresentando: A Biblioteca Digital Clean Sweet</h2>
-                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #555;">Mais de 500 receitas organizadas, testadas e à prova de falhas. É como um caderno de receitas inteligente: você acessa imediatamente pelo seu celular, tablet ou computador — sem precisar baixar nenhum aplicativo complicado.</p>
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #555;">Mais de 500 receitas
+                    organizadas, testadas e à prova de falhas. É como um caderno de receitas inteligente: você acessa
+                    imediatamente pelo seu celular, tablet ou computador — sem precisar baixar nenhum aplicativo
+                    complicado.</p>
                 <ul>
                     <li>Coma doces sem culpa e mantenha o ritual em família.</li>
                     <li>Tenha tamanhos de porções claros com a Calculadora Integrada.</li>
@@ -1209,7 +1258,8 @@
                 <div class="bonus-card">
                     <img src="images/B1.png" alt="Receita do Chá Dourado">
                     <div class="bonus-info">
-                        <h3>A receita do chá dourado que pode reduzir a glicose no sangue em jejum em até 40 pontos em menos de 14 dias.</h3>
+                        <h3>A receita do chá dourado que pode reduzir a glicose no sangue em jejum em até 40 pontos em
+                            menos de 14 dias.</h3>
                         <p class="bonus-price">R$ 9,90</p>
                         <p class="bonus-free">GRÁTIS!</p>
                     </div>
@@ -1217,7 +1267,8 @@
                 <div class="bonus-card">
                     <img src="images/B2.png" alt="Lista Negra de Medicamentos">
                     <div class="bonus-info">
-                        <h3>A lista negra de medicamentos e suplementos que mais aumentam a glicose no sangue — e que a maioria das pessoas toma sem saber…</h3>
+                        <h3>A lista negra de medicamentos e suplementos que mais aumentam a glicose no sangue — e que a
+                            maioria das pessoas toma sem saber…</h3>
                         <p class="bonus-price">R$ 9,90</p>
                         <p class="bonus-free">GRÁTIS!</p>
                     </div>
@@ -1251,7 +1302,8 @@
             <h3>Apresentando: A Biblioteca Digital Clean Sweet</h3>
             <h2>Clean Sweet</h2>
             <div class="price-box">
-                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #555;">Hoje, o acesso vitalício à Biblioteca Clean Sweet não custará os R$ 69,90 normais.</p>
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #555;">Hoje, o acesso
+                    vitalício à Biblioteca Clean Sweet não custará os R$ 69,90 normais.</p>
                 <p class="price-old">R$ 69,90</p>
                 <p class="price-new">R$ 19,00</p>
                 <p class="price-note">Acesso imediato e vitalício. Sem mensalidades. Pague apenas uma vez hoje:</p>
@@ -1289,7 +1341,8 @@
                 <div class="faq-question">É um pagamento único ou uma assinatura?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        É um <strong>pagamento único de R$ 19,00</strong>. Não há mensalidades. Sem renovações automáticas. Sem taxas ocultas. Você paga uma vez e o acesso é seu.
+                        É um <strong>pagamento único de R$ 19,00</strong>. Não há mensalidades. Sem renovações
+                        automáticas. Sem taxas ocultas. Você paga uma vez e o acesso é seu.
                     </div>
                 </div>
             </div>
@@ -1297,7 +1350,9 @@
                 <div class="faq-question">Como recebo o acesso?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        Assim que seu pagamento for confirmado, a Hotmart enviará automaticamente um e-mail com os detalhes de acesso ao aplicativo. Basta verificar sua caixa de entrada (e a pasta de spam, se necessário), e você poderá acessar imediatamente.
+                        Assim que seu pagamento for confirmado, a Hotmart enviará automaticamente um e-mail com os
+                        detalhes de acesso ao aplicativo. Basta verificar sua caixa de entrada (e a pasta de spam, se
+                        necessário), e você poderá acessar imediatamente.
                     </div>
                 </div>
             </div>
@@ -1313,7 +1368,9 @@
                 <div class="faq-question">Como faço o pagamento?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        O pagamento é processado de forma 100% segura através da Hotmart, uma das plataformas digitais mais reconhecidas e confiáveis do mercado. Você pode pagar com cartão de crédito, débito e outros métodos disponíveis dependendo do seu país.
+                        O pagamento é processado de forma 100% segura através da Hotmart, uma das plataformas digitais
+                        mais reconhecidas e confiáveis do mercado. Você pode pagar com cartão de crédito, débito e
+                        outros métodos disponíveis dependendo do seu país.
                     </div>
                 </div>
             </div>
@@ -1321,7 +1378,8 @@
                 <div class="faq-question">Por quanto tempo terei acesso?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        O acesso é vitalício e não tem prazo de validade. Você também receberá todas as atualizações futuras sem custo adicional.
+                        O acesso é vitalício e não tem prazo de validade. Você também receberá todas as atualizações
+                        futuras sem custo adicional.
                     </div>
                 </div>
             </div>
@@ -1329,7 +1387,8 @@
                 <div class="faq-question">E se eu não gostar?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        Você tem uma garantia de 7 dias. Se não ficar satisfeito, pode solicitar o reembolso diretamente dentro do período estabelecido. Sem complicações.
+                        Você tem uma garantia de 7 dias. Se não ficar satisfeito, pode solicitar o reembolso diretamente
+                        dentro do período estabelecido. Sem complicações.
                     </div>
                 </div>
             </div>
@@ -1378,4 +1437,6 @@
 
 
 
-</body></html>
+</body>
+
+</html>
