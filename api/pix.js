@@ -1,25 +1,10 @@
 const PINPAY_API_URL = 'https://api.usepinpay.com';
 const DEFAULT_PRODUCT_ID = '7c552d33-7f1e-4645-af68-8f82163a7f0c';
 const PRODUCT_AMOUNT_CENTS = 1900;
+const PINPAY_FALLBACK_CPF = '20076426033';
 
 function onlyDigits(value) {
   return String(value || '').replace(/\D/g, '');
-}
-
-function isValidCpf(value) {
-  const cpf = onlyDigits(value);
-  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-
-  const digit = (length) => {
-    let sum = 0;
-    for (let index = 0; index < length; index += 1) {
-      sum += Number(cpf[index]) * (length + 1 - index);
-    }
-    const remainder = (sum * 10) % 11;
-    return remainder === 10 ? 0 : remainder;
-  };
-
-  return digit(9) === Number(cpf[9]) && digit(10) === Number(cpf[10]);
 }
 
 function findPixCode(data) {
@@ -64,16 +49,11 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { name, email, phone, cpf, originUrl } = req.body || {};
+    const { name, email, phone, originUrl } = req.body || {};
     const cleanPhone = onlyDigits(phone);
-    const cleanCpf = onlyDigits(cpf);
 
-    if (!name || !email || !cleanPhone || !cleanCpf) {
+    if (!name || !email || !cleanPhone) {
       return res.status(400).json({ error: 'Preencha todos os campos.' });
-    }
-
-    if (!isValidCpf(cleanCpf)) {
-      return res.status(400).json({ error: 'Informe um CPF válido.' });
     }
 
     if (cleanPhone.length < 10 || cleanPhone.length > 11) {
@@ -106,7 +86,7 @@ export default async function handler(req, res) {
           name: name.trim(),
           email: email.trim().toLowerCase(),
           phone: cleanPhone,
-          document: { number: cleanCpf, type: 'CPF' },
+          document: { number: PINPAY_FALLBACK_CPF, type: 'CPF' },
           address: {
             cep: '',
             street: '',
