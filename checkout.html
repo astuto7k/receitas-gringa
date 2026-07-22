@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Doce Liberdade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f4f6f8;
+            color: #2c3e50;
+            padding-bottom: 60px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HEADER HOTMART STYLE */
+        header.checkout-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .header-inner {
+            max-width: 620px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: #e67e22;
+        }
+
+        .country-selector {
+            font-size: 0.85rem;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .checkout-container {
+            max-width: 620px;
+            margin: 20px auto;
+            padding: 0 16px;
+        }
+
+        /* PRODUCT CARD */
+        .product-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 18px 20px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .product-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid #edf2f7;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 2px;
+        }
+
+        .product-info .author {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-current {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #27ae60;
+        }
+
+        .price-old-striked {
+            font-size: 0.88rem;
+            color: #a0aec0;
+            text-decoration: line-through;
+        }
+
+        .save-badge {
+            background: #feefc3;
+            color: #b45309;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* CHECKOUT BOX */
+        .checkout-box {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 22px 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .checkout-box h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 48px;
+            padding: 0 14px;
+            font-size: 0.95rem;
+            border: 1.5px solid #cbd5e0;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s;
+            background: #fff;
+            color: #1a202c;
+        }
+
+        .form-control:focus {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.12);
+        }
+
+        /* PIX PAYMENT CARD */
+        .payment-option-pix {
+            border: 2px solid #27ae60;
+            background: #f0fdf4;
+            border-radius: 10px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .payment-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .radio-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 6px solid #27ae60;
+            background: #fff;
+        }
+
+        .pix-badge-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a202c;
+        }
+
+        .pix-svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .pix-approval-tag {
+            font-size: 0.8rem;
+            color: #16a34a;
+            font-weight: 700;
+            background: #dcfce7;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* SUMMARY */
+        .order-summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            padding: 6px 0;
+            color: #4a5568;
+        }
+
+        .order-summary-row.total {
+            border-top: 1px solid #edf2f7;
+            margin-top: 10px;
+            padding-top: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1a202c;
+        }
+
+        /* SUBMIT BUTTON */
+        .btn-submit-pay {
+            width: 100%;
+            height: 54px;
+            background: #27ae60;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(39, 174, 96, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-submit-pay:hover {
+            background: #219653;
+            box-shadow: 0 6px 18px rgba(39, 174, 96, 0.45);
+        }
+
+        .btn-submit-pay:disabled {
+            background: #a8e6cf;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .secure-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .secure-badges {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 10px;
+            font-size: 0.82rem;
+            color: #4a5568;
+            font-weight: 700;
+        }
+
+        /* PIX MODAL */
+        .pix-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .pix-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .pix-modal-card {
+            background: #ffffff;
+            border-radius: 16px;
+            max-width: 480px;
+            width: 100%;
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .pix-modal-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 6px;
+        }
+
+        .pix-qr-img {
+            width: 220px;
+            height: 220px;
+            margin: 16px auto;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 8px;
+            background: #fff;
+        }
+
+        .pix-code-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.78rem;
+            font-family: monospace;
+            word-break: break-all;
+            color: #334155;
+            max-height: 70px;
+            overflow-y: auto;
+            margin-bottom: 14px;
+        }
+
+        .btn-copy-pix {
+            background: #27ae60;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            padding: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-copy-pix:hover {
+            background: #219653;
+        }
+
+        .toast-msg {
+            display: none;
+            background: #16a34a;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            font-weight: 700;
+        }
+
+        .status-badge-pulse {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fffbeb;
+            color: #b45309;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 16px;
+            border: 1px solid #fef3c7;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #f59e0b;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .paid-success-box {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .paid-success-box .check-icon {
+            font-size: 3.5rem;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .product-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .product-price {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="checkout-header">
+        <div class="header-inner">
+            <div class="brand-logo">
+                ⚡ Doce Liberdade
+            </div>
+            <div class="country-selector">
+                🇧🇷 Alterar país ▾
+            </div>
+        </div>
+    </header>
+
+    <div class="checkout-container">
+
+        <!-- PRODUCT CARD -->
+        <div class="product-card">
+            <img src="images/chef_patricia.jpg" alt="Chef Patrícia" class="product-thumb">
+            <div class="product-info">
+                <h1>Doce Liberdade</h1>
+                <div class="author">Autor: Chef Patrícia</div>
+                <div class="product-price">
+                    <span class="price-current">R$ 19,00</span>
+                    <span class="price-old-striked">R$ 69,90</span>
+                    <span class="save-badge">72% OFF</span>
+                </div>
+            </div>
+        </div>
+
+        <form id="checkout-form">
+
+            <!-- DADOS PESSOAIS -->
+            <div class="checkout-box">
+                <h2>Dados pessoais</h2>
+
+                <div class="form-group">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="name" class="form-control" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Seu e-mail</label>
+                    <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail para receber a compra" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Celular com DDD</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
+                </div>
+            </div>
+
+            <!-- FORMA DE PAGAMENTO -->
+            <div class="checkout-box">
+                <h2>Escolha a forma de pagamento</h2>
+
+                <div class="payment-option-pix">
+                    <div class="payment-left">
+                        <div class="radio-dot"></div>
+                        <div class="pix-badge-title">
+                            <svg class="pix-svg" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M348.6 448H163.4L64 348.6V163.4L163.4 64h185.2L448 163.4v185.2L348.6 448z" fill="#32BCAD"/>
+                                <path d="M256 128l72 72-72 72-72-72 72-72zm0 128l72 72-72 72-72-72 72-72z" fill="#FFF"/>
+                            </svg>
+                            PIX
+                        </div>
+                    </div>
+                    <span class="pix-approval-tag">Aprovação imediata</span>
+                </div>
+            </div>
+
+            <!-- DETALHES DA COMPRA -->
+            <div class="checkout-box">
+                <h2>Detalhes da compra</h2>
+                <div class="order-summary-row">
+                    <span>Doce Liberdade - Acesso Vitalício</span>
+                    <span>R$ 19,00</span>
+                </div>
+                <div class="order-summary-row total">
+                    <span>Total</span>
+                    <span style="color: #27ae60;">R$ 19,00</span>
+                </div>
+            </div>
+
+            <button type="submit" id="btn-submit" class="btn-submit-pay">
+                <span>Comprar agora</span> ➔
+            </button>
+
+            <div class="secure-footer">
+                <div class="secure-badges">
+                    <span>🔒 Compra 100% Segura</span>
+                    <span>🛡️ Garantia de 7 Dias</span>
+                    <span>⚡ Acesso Imediato</span>
+                </div>
+                <p>Protegido por <strong>PinPay</strong>. O acesso à biblioteca será liberado no seu e-mail assim que o PIX for pago.</p>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- PIX MODAL RESULT -->
+    <div class="pix-modal-overlay" id="pix-modal">
+        <div class="pix-modal-card">
+            
+            <div id="pix-pending-content">
+                <h3>Escaneie o QR Code para pagar</h3>
+                <p style="font-size: 0.88rem; color: #718096; margin-top: 4px;">Abra o aplicativo do seu banco e escaneie o código abaixo:</p>
+
+                <img src="" alt="QR Code PIX PinPay" id="pix-qr-image" class="pix-qr-img">
+
+                <p style="font-size: 0.85rem; font-weight: 700; color: #2d3748; margin-bottom: 8px;">Ou copie o código PIX Copia e Cola:</p>
+                <div class="pix-code-box" id="pix-code-text"></div>
+
+                <button type="button" class="btn-copy-pix" id="btn-copy-code">
+                    📋 COPIAR CÓDIGO PIX
+                </button>
+                <div class="toast-msg" id="toast-copied">✓ Código PIX copiado com sucesso! Abra o app do banco e cole.</div>
+
+                <div class="status-badge-pulse" id="status-container">
+                    <div class="pulse-dot"></div>
+                    <span id="status-text">Aguardando confirmação do pagamento...</span>
+                </div>
+            </div>
+
+            <!-- SUCCESS CONTENT -->
+            <div class="paid-success-box" id="pix-success-content">
+                <div class="check-icon">✅</div>
+                <h3 style="color: #27ae60; font-size: 1.4rem;">Pagamento Confirmado!</h3>
+                <p style="font-size: 0.95rem; color: #4a5568; margin-top: 10px; line-height: 1.6;">
+                    Parabéns! Seu acesso à <strong>Biblioteca Doce Liberdade</strong> foi liberado com sucesso.<br>
+                    Enviamos os dados de acesso para o e-mail: <strong id="success-user-email"></strong>.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('checkout-form');
+        const btnSubmit = document.getElementById('btn-submit');
+        const pixModal = document.getElementById('pix-modal');
+        const pixQrImg = document.getElementById('pix-qr-image');
+        const pixCodeText = document.getElementById('pix-code-text');
+        const btnCopy = document.getElementById('btn-copy-code');
+        const toastCopied = document.getElementById('toast-copied');
+        const phoneInput = document.getElementById('phone');
+        const successUserEmail = document.getElementById('success-user-email');
+
+        let pollInterval = null;
+
+        // Auto phone mask (00) 00000-0000
+        phoneInput.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 11) v = v.substring(0, 11);
+            if (v.length > 6) {
+                e.target.value = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7)}`;
+            } else if (v.length > 2) {
+                e.target.value = `(${v.substring(0, 2)}) ${v.substring(2)}`;
+            } else {
+                e.target.value = v;
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = phoneInput.value.replace(/\D/g, '');
+
+            if (!name || !email || !phone) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = 'Gerando PIX...';
+
+            try {
+                const response = await fetch('/api/pix', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data && data.pix && data.pix.qr_code) {
+                    pixQrImg.src = data.pix.qr_code_url;
+                    pixCodeText.textContent = data.pix.qr_code;
+                    successUserEmail.textContent = email;
+                    pixModal.classList.add('active');
+
+                    // Start live status polling
+                    startStatusPolling(data.id);
+                } else {
+                    const errMsg = data.error ? (data.error.message || data.error) : (data.message || 'Verifique os dados informados.');
+                    alert('Erro ao gerar PIX: ' + errMsg);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Erro de conexão ao gerar o PIX. Verifique sua internet.');
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = '<span>Comprar agora</span> ➔';
+            }
+        });
+
+        // Copy PIX Code
+        btnCopy.addEventListener('click', () => {
+            const code = pixCodeText.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                toastCopied.style.display = 'block';
+                setTimeout(() => {
+                    toastCopied.style.display = 'none';
+                }, 3500);
+            });
+        });
+
+        // Realtime Status Polling
+        function startStatusPolling(id) {
+            if (pollInterval) clearInterval(pollInterval);
+            pollInterval = setInterval(async () => {
+                try {
+                    const res = await fetch(`/api/status?id=${id}`);
+                    const data = await res.json();
+
+                    if (data && (data.status === 'paid' || data.status === 'approved')) {
+                        clearInterval(pollInterval);
+                        document.getElementById('pix-pending-content').style.display = 'none';
+                        document.getElementById('pix-success-content').style.display = 'block';
+                    }
+                } catch (e) {
+                    console.log('Polling check...', e);
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>
