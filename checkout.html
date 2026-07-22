@@ -1,689 +1,1072 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fffdf9" />
+    <meta name="description" content="Finalize sua compra da Biblioteca Doce Liberdade com pagamento seguro via PIX." />
     <title>Checkout - Doce Liberdade</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      :root {
+        --canvas: #f7f5f1;
+        --surface: #ffffff;
+        --surface-soft: #fffaf3;
+        --ink: #17201b;
+        --muted: #69736d;
+        --line: #e4e7e4;
+        --line-strong: #cfd6d1;
+        --brand: #df7b2b;
+        --brand-soft: #fff0df;
+        --success: #148a4b;
+        --success-hover: #0f733e;
+        --success-soft: #edf9f1;
+        --pix: #32bcad;
+        --warning: #a85d0a;
+        --warning-soft: #fff7e6;
+        --danger: #c33b35;
+        --shadow: 0 18px 60px rgba(29, 41, 34, 0.08);
+        --radius-xl: 22px;
+        --radius-lg: 16px;
+        --radius-md: 12px;
+      }
 
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+      }
+
+      html {
+        color-scheme: light;
+        background: var(--canvas);
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        padding-bottom: 40px;
+        background:
+          radial-gradient(circle at 50% -100px, rgba(223, 123, 43, 0.1), transparent 340px),
+          var(--canvas);
+        color: var(--ink);
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .checkout-header {
+        border-bottom: 1px solid rgba(207, 214, 209, 0.9);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      .header-inner {
+        width: min(100% - 32px, 660px);
+        min-height: 68px;
+        margin-inline: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        font-family: "Manrope", sans-serif;
+        font-size: 0.98rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: var(--brand-soft);
+        color: var(--brand);
+      }
+
+      .brand-mark svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .country-selector {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .country-selector svg {
+        width: 15px;
+        height: 15px;
+        color: var(--success);
+      }
+
+      .checkout-container {
+        width: min(100% - 24px, 660px);
+        margin: 18px auto 0;
+      }
+
+      .checkout-shell {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .checkout-progress {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        padding: 9px 10px 0;
+      }
+
+      .checkout-progress span {
+        height: 4px;
+        border-radius: 999px;
+        background: #e6e9e7;
+      }
+
+      .checkout-progress span:first-child {
+        background: var(--success);
+      }
+
+      .progress-copy {
+        padding: 10px 18px 12px;
+        color: var(--muted);
+        font-size: 0.73rem;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .product-card {
+        margin: 0 14px 6px;
+        padding: 16px;
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 14px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface-soft);
+      }
+
+      .product-thumb {
+        width: 76px;
+        height: 76px;
+        border: 3px solid #fff;
+        border-radius: 14px;
+        object-fit: cover;
+        box-shadow: 0 5px 16px rgba(45, 35, 24, 0.1);
+      }
+
+      .product-info {
+        min-width: 0;
+      }
+
+      .product-info h1 {
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(1rem, 5vw, 1.18rem);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.18;
+      }
+
+      .author {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      .product-price {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 6px 9px;
+      }
+
+      .price-current {
+        color: var(--success);
+        font-family: "Manrope", sans-serif;
+        font-size: 1.28rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .price-old-striked {
+        color: #929b96;
+        font-size: 0.76rem;
+        text-decoration: line-through;
+      }
+
+      .save-badge {
+        padding: 3px 7px;
+        border: 1px solid #f2d8b4;
+        border-radius: 999px;
+        background: var(--brand-soft);
+        color: #9d5517;
+        font-size: 0.65rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      #checkout-form {
+        padding: 6px 14px 16px;
+      }
+
+      .checkout-box {
+        padding: 18px 2px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .checkout-box:last-of-type {
+        border-bottom: 0;
+      }
+
+      .section-title {
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-title .step {
+        width: 26px;
+        height: 26px;
+        flex: 0 0 26px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ink);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 800;
+      }
+
+      .section-title h2 {
+        font-family: "Manrope", sans-serif;
+        font-size: 0.96rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .section-title small {
+        margin-left: auto;
+        color: var(--muted);
+        font-size: 0.67rem;
+        font-weight: 500;
+      }
+
+      .form-group + .form-group {
+        margin-top: 13px;
+      }
+
+      .form-group label {
+        margin-bottom: 6px;
+        display: block;
+        color: #3f4943;
+        font-size: 0.79rem;
+        font-weight: 700;
+      }
+
+      .field-wrap {
+        position: relative;
+      }
+
+      .field-icon {
+        position: absolute;
+        top: 50%;
+        left: 14px;
+        width: 19px;
+        height: 19px;
+        transform: translateY(-50%);
+        color: #8c9690;
+        pointer-events: none;
+      }
+
+      .form-control {
+        width: 100%;
+        min-height: 52px;
+        padding: 0 14px 0 44px;
+        border: 1.5px solid var(--line-strong);
+        border-radius: var(--radius-md);
+        outline: 0;
+        background: #fff;
+        color: var(--ink);
+        font-size: 0.93rem;
+        transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      }
+
+      .form-control::placeholder {
+        color: #9ca49f;
+      }
+
+      .form-control:hover {
+        border-color: #aeb8b1;
+      }
+
+      .form-control:focus {
+        border-color: var(--success);
+        box-shadow: 0 0 0 4px rgba(20, 138, 75, 0.11);
+      }
+
+      .form-control:user-invalid {
+        border-color: var(--danger);
+      }
+
+      .payment-option-pix {
+        min-height: 68px;
+        padding: 13px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border: 2px solid var(--success);
+        border-radius: var(--radius-md);
+        background: var(--success-soft);
+      }
+
+      .payment-left,
+      .pix-badge-title {
+        display: flex;
+        align-items: center;
+      }
+
+      .payment-left {
+        gap: 11px;
+      }
+
+      .radio-dot {
+        width: 20px;
+        height: 20px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: inset 0 0 0 5px #fff;
+      }
+
+      .pix-badge-title {
+        gap: 8px;
+        font-family: "Manrope", sans-serif;
+        font-size: 0.94rem;
+        font-weight: 800;
+      }
+
+      .pix-svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      .pix-approval-tag {
+        display: grid;
+        gap: 1px;
+        color: var(--success);
+        font-size: 0.68rem;
+        font-weight: 800;
+        text-align: right;
+      }
+
+      .pix-approval-tag::after {
+        content: "sem taxa";
+        color: var(--muted);
+        font-size: 0.61rem;
+        font-weight: 500;
+      }
+
+      .summary-box {
+        margin-top: 3px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: #fafbf9;
+      }
+
+      .order-summary-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 0.79rem;
+        line-height: 1.45;
+      }
+
+      .order-summary-row span:first-child {
+        max-width: 72%;
+      }
+
+      .order-summary-row.total {
+        margin-top: 11px;
+        padding-top: 11px;
+        align-items: center;
+        border-top: 1px solid var(--line);
+        color: var(--ink);
+        font-family: "Manrope", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 800;
+      }
+
+      .order-summary-row.total span:last-child {
+        color: var(--success);
+        font-size: 1.13rem;
+      }
+
+      .btn-submit-pay {
+        width: 100%;
+        min-height: 56px;
+        margin-top: 14px;
+        padding-inline: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: 0;
+        border-radius: var(--radius-md);
+        background: var(--success);
+        box-shadow: 0 10px 24px rgba(20, 138, 75, 0.22);
+        color: #fff;
+        cursor: pointer;
+        font-family: "Manrope", sans-serif;
+        font-size: 0.98rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
+      }
+
+      .btn-submit-pay svg {
+        width: 19px;
+        height: 19px;
+        transition: transform 150ms ease;
+      }
+
+      .btn-submit-pay:hover {
+        background: var(--success-hover);
+        box-shadow: 0 13px 28px rgba(20, 138, 75, 0.28);
+        transform: translateY(-1px);
+      }
+
+      .btn-submit-pay:hover svg {
+        transform: translateX(2px);
+      }
+
+      .btn-submit-pay:focus-visible,
+      .btn-copy-pix:focus-visible {
+        outline: 3px solid rgba(20, 138, 75, 0.28);
+        outline-offset: 3px;
+      }
+
+      .btn-submit-pay:disabled {
+        background: #8fbea3;
+        box-shadow: none;
+        cursor: wait;
+        transform: none;
+      }
+
+      .button-note {
+        margin-top: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 0.7rem;
+        text-align: center;
+      }
+
+      .button-note svg {
+        width: 14px;
+        height: 14px;
+        color: var(--success);
+      }
+
+      .secure-footer {
+        padding: 13px 4px 4px;
+        color: var(--muted);
+        font-size: 0.68rem;
+        line-height: 1.55;
+        text-align: center;
+      }
+
+      .secure-badges {
+        margin-bottom: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+      }
+
+      .secure-badges span {
+        min-height: 54px;
+        padding: 8px 4px;
+        display: grid;
+        place-items: center;
+        align-content: center;
+        gap: 3px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fbfcfb;
+        color: #4d5851;
+        font-size: 0.62rem;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .secure-badges svg {
+        width: 18px;
+        height: 18px;
+        color: var(--success);
+      }
+
+      .pix-modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        padding: 12px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        background: rgba(17, 29, 22, 0.7);
+        backdrop-filter: blur(8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 220ms ease;
+      }
+
+      .pix-modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .pix-modal-card {
+        width: min(100%, 480px);
+        max-height: calc(100dvh - 24px);
+        overflow-y: auto;
+        padding: 24px 18px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 24px;
+        background: var(--surface);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        transform: translateY(24px);
+        transition: transform 220ms ease;
+      }
+
+      .pix-modal-overlay.active .pix-modal-card {
+        transform: translateY(0);
+      }
+
+      .modal-icon {
+        width: 46px;
+        height: 46px;
+        margin: 0 auto 10px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: #eafaf7;
+      }
+
+      .modal-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .pix-modal-card h3 {
+        font-family: "Manrope", sans-serif;
+        font-size: 1.17rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .modal-lead {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+
+      .pix-qr-img {
+        width: 198px;
+        height: 198px;
+        margin: 15px auto;
+        padding: 7px;
+        display: block;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        background: #fff;
+      }
+
+      .copy-label {
+        margin-bottom: 7px;
+        color: #414b45;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .pix-code-box {
+        max-height: 62px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid var(--line-strong);
+        border-radius: 10px;
+        background: #f8faf8;
+        color: #536059;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.68rem;
+        line-height: 1.45;
+        word-break: break-all;
+      }
+
+      .btn-copy-pix {
+        width: 100%;
+        min-height: 52px;
+        margin-top: 10px;
+        padding: 12px 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 0;
+        border-radius: var(--radius-md);
+        background: var(--success);
+        color: #fff;
+        cursor: pointer;
+        font-family: "Manrope", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 800;
+      }
+
+      .btn-copy-pix svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .btn-copy-pix:hover {
+        background: var(--success-hover);
+      }
+
+      .toast-msg {
+        margin-top: 9px;
+        padding: 9px 12px;
+        display: none;
+        border-radius: 9px;
+        background: var(--success-soft);
+        color: var(--success);
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .status-badge-pulse {
+        margin-top: 13px;
+        padding: 8px 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #f1dfb6;
+        border-radius: 999px;
+        background: var(--warning-soft);
+        color: var(--warning);
+        font-size: 0.71rem;
+        font-weight: 700;
+      }
+
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d97706;
+        animation: pulse 1.4s infinite;
+      }
+
+      .paid-success-box {
+        display: none;
+        padding: 18px 0 8px;
+      }
+
+      .paid-success-box .check-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 13px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--success-soft);
+        color: var(--success);
+      }
+
+      .paid-success-box .check-icon svg {
+        width: 34px;
+        height: 34px;
+      }
+
+      .success-copy {
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 0.83rem;
+        line-height: 1.6;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.35; transform: scale(0.9); }
+        50% { opacity: 1; transform: scale(1); }
+      }
+
+      @media (min-width: 560px) {
         body {
-            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #f4f6f8;
-            color: #2c3e50;
-            padding-bottom: 60px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* HEADER HOTMART STYLE */
-        header.checkout-header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 12px 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-        }
-
-        .header-inner {
-            max-width: 620px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1.15rem;
-            color: #e67e22;
-        }
-
-        .country-selector {
-            font-size: 0.85rem;
-            color: #4a5568;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
+          padding-bottom: 64px;
         }
 
         .checkout-container {
-            max-width: 620px;
-            margin: 20px auto;
-            padding: 0 16px;
+          margin-top: 28px;
         }
 
-        /* PRODUCT CARD */
         .product-card {
-            background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            padding: 18px 20px;
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+          margin-inline: 20px;
+          padding: 18px;
+          grid-template-columns: 88px minmax(0, 1fr);
         }
 
         .product-thumb {
-            width: 80px;
-            height: 80px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 1px solid #edf2f7;
+          width: 88px;
+          height: 88px;
         }
 
-        .product-info {
-            flex: 1;
+        #checkout-form {
+          padding: 6px 20px 22px;
         }
 
-        .product-info h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #1a202c;
-            margin-bottom: 2px;
-        }
-
-        .product-info .author {
-            font-size: 0.85rem;
-            color: #718096;
-            margin-bottom: 8px;
-        }
-
-        .product-price {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .price-current {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: #27ae60;
-        }
-
-        .price-old-striked {
-            font-size: 0.88rem;
-            color: #a0aec0;
-            text-decoration: line-through;
-        }
-
-        .save-badge {
-            background: #feefc3;
-            color: #b45309;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        /* CHECKOUT BOX */
         .checkout-box {
-            background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            padding: 22px 24px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+          padding: 21px 4px;
         }
 
-        .checkout-box h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 16px;
-        }
-
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 6px;
-        }
-
-        .form-control {
-            width: 100%;
-            height: 48px;
-            padding: 0 14px;
-            font-size: 0.95rem;
-            border: 1.5px solid #cbd5e0;
-            border-radius: 8px;
-            outline: none;
-            transition: all 0.2s;
-            background: #fff;
-            color: #1a202c;
-        }
-
-        .form-control:focus {
-            border-color: #27ae60;
-            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.12);
-        }
-
-        /* PIX PAYMENT CARD */
-        .payment-option-pix {
-            border: 2px solid #27ae60;
-            background: #f0fdf4;
-            border-radius: 10px;
-            padding: 16px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .payment-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .radio-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 6px solid #27ae60;
-            background: #fff;
-        }
-
-        .pix-badge-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #1a202c;
-        }
-
-        .pix-svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .pix-approval-tag {
-            font-size: 0.8rem;
-            color: #16a34a;
-            font-weight: 700;
-            background: #dcfce7;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        /* SUMMARY */
-        .order-summary-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.92rem;
-            padding: 6px 0;
-            color: #4a5568;
-        }
-
-        .order-summary-row.total {
-            border-top: 1px solid #edf2f7;
-            margin-top: 10px;
-            padding-top: 14px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #1a202c;
-        }
-
-        /* SUBMIT BUTTON */
-        .btn-submit-pay {
-            width: 100%;
-            height: 54px;
-            background: #27ae60;
-            color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 14px rgba(39, 174, 96, 0.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-submit-pay:hover {
-            background: #219653;
-            box-shadow: 0 6px 18px rgba(39, 174, 96, 0.45);
-        }
-
-        .btn-submit-pay:disabled {
-            background: #a8e6cf;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .secure-footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #718096;
-            line-height: 1.6;
-        }
-
-        .secure-badges {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            margin-bottom: 10px;
-            font-size: 0.82rem;
-            color: #4a5568;
-            font-weight: 700;
-        }
-
-        /* PIX MODAL */
         .pix-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(4px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .pix-modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
+          align-items: center;
+          padding: 24px;
         }
 
         .pix-modal-card {
-            background: #ffffff;
-            border-radius: 16px;
-            max-width: 480px;
-            width: 100%;
-            padding: 28px 24px;
-            text-align: center;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-            max-height: 90vh;
-            overflow-y: auto;
+          padding: 28px;
         }
+      }
 
-        .pix-modal-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #1a202c;
-            margin-bottom: 6px;
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
         }
-
-        .pix-qr-img {
-            width: 220px;
-            height: 220px;
-            margin: 16px auto;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 8px;
-            background: #fff;
-        }
-
-        .pix-code-box {
-            background: #f8fafc;
-            border: 1px solid #cbd5e0;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 0.78rem;
-            font-family: monospace;
-            word-break: break-all;
-            color: #334155;
-            max-height: 70px;
-            overflow-y: auto;
-            margin-bottom: 14px;
-        }
-
-        .btn-copy-pix {
-            background: #27ae60;
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            padding: 16px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-copy-pix:hover {
-            background: #219653;
-        }
-
-        .toast-msg {
-            display: none;
-            background: #16a34a;
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            font-weight: 700;
-        }
-
-        .status-badge-pulse {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #fffbeb;
-            color: #b45309;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-top: 16px;
-            border: 1px solid #fef3c7;
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background: #f59e0b;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        .paid-success-box {
-            display: none;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .paid-success-box .check-icon {
-            font-size: 3.5rem;
-            color: #27ae60;
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 480px) {
-            .product-card {
-                flex-direction: column;
-                text-align: center;
-            }
-            .product-price {
-                justify-content: center;
-            }
-        }
+      }
     </style>
-</head>
-
-<body>
-
+  </head>
+  <body>
     <header class="checkout-header">
-        <div class="header-inner">
-            <div class="brand-logo">
-                ⚡ Doce Liberdade
-            </div>
-            <div class="country-selector">
-                🇧🇷 Alterar país ▾
-            </div>
+      <div class="header-inner">
+        <div class="brand-logo">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2 4.5 13.2h6.7L11 22l8.5-11.2h-6.7L13 2Z" />
+            </svg>
+          </span>
+          <span>Doce Liberdade</span>
         </div>
+        <div class="country-selector">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          Pagamento seguro
+        </div>
+      </div>
     </header>
 
-    <div class="checkout-container">
+    <main class="checkout-container">
+      <div class="checkout-shell">
+        <div class="checkout-progress" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="progress-copy">Você está a poucos passos de liberar seu acesso</p>
 
-        <!-- PRODUCT CARD -->
-        <div class="product-card">
-            <img src="images/chef_patricia.jpg" alt="Chef Patrícia" class="product-thumb">
-            <div class="product-info">
-                <h1>Doce Liberdade</h1>
-                <div class="author">Autor: Chef Patrícia</div>
-                <div class="product-price">
-                    <span class="price-current">R$ 19,00</span>
-                    <span class="price-old-striked">R$ 69,90</span>
-                    <span class="save-badge">72% OFF</span>
-                </div>
+        <section class="product-card" aria-labelledby="product-title">
+          <img src="images/chef_patricia.jpg" alt="Chef Patrícia" class="product-thumb" width="88" height="88" />
+          <div class="product-info">
+            <h1 id="product-title">Doce Liberdade</h1>
+            <p class="author">Autor: Chef Patrícia</p>
+            <div class="product-price">
+              <span class="price-current">R$ 19,00</span>
+              <span class="price-old-striked">R$ 69,90</span>
+              <span class="save-badge">72% OFF</span>
             </div>
-        </div>
+          </div>
+        </section>
 
-        <form id="checkout-form">
-
-            <!-- DADOS PESSOAIS -->
-            <div class="checkout-box">
-                <h2>Dados pessoais</h2>
-
-                <div class="form-group">
-                    <label for="name">Nome completo</label>
-                    <input type="text" id="name" class="form-control" placeholder="Digite seu nome completo" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Seu e-mail</label>
-                    <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail para receber a compra" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Celular com DDD</label>
-                    <input type="tel" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
-                </div>
+        <form id="checkout-form" novalidate>
+          <section class="checkout-box" aria-labelledby="personal-data-title">
+            <div class="section-title">
+              <span class="step" aria-hidden="true">1</span>
+              <h2 id="personal-data-title">Dados pessoais</h2>
+              <small>Todos os campos são obrigatórios</small>
             </div>
 
-            <!-- FORMA DE PAGAMENTO -->
-            <div class="checkout-box">
-                <h2>Escolha a forma de pagamento</h2>
-
-                <div class="payment-option-pix">
-                    <div class="payment-left">
-                        <div class="radio-dot"></div>
-                        <div class="pix-badge-title">
-                            <svg class="pix-svg" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M348.6 448H163.4L64 348.6V163.4L163.4 64h185.2L448 163.4v185.2L348.6 448z" fill="#32BCAD"/>
-                                <path d="M256 128l72 72-72 72-72-72 72-72zm0 128l72 72-72 72-72-72 72-72z" fill="#FFF"/>
-                            </svg>
-                            PIX
-                        </div>
-                    </div>
-                    <span class="pix-approval-tag">Aprovação imediata</span>
-                </div>
+            <div class="form-group">
+              <label for="name">Nome completo</label>
+              <div class="field-wrap">
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="8" r="4" /><path d="M4 22a8 8 0 0 1 16 0" />
+                </svg>
+                <input type="text" id="name" class="form-control" placeholder="Digite seu nome completo" autocomplete="name" required />
+              </div>
             </div>
 
-            <!-- DETALHES DA COMPRA -->
-            <div class="checkout-box">
-                <h2>Detalhes da compra</h2>
-                <div class="order-summary-row">
-                    <span>Doce Liberdade - Acesso Vitalício</span>
-                    <span>R$ 19,00</span>
+            <div class="form-group">
+              <label for="email">Seu e-mail</label>
+              <div class="field-wrap">
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-10 6L2 7" />
+                </svg>
+                <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail para receber a compra" autocomplete="email" inputmode="email" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Celular com DDD</label>
+              <div class="field-wrap">
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.8a2 2 0 0 1-.45 2.11L8.07 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.32 1.84.55 2.8.68A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <input type="tel" id="phone" class="form-control" placeholder="(00) 00000-0000" autocomplete="tel" inputmode="numeric" maxlength="15" required />
+              </div>
+            </div>
+          </section>
+
+          <section class="checkout-box" aria-labelledby="payment-title">
+            <div class="section-title">
+              <span class="step" aria-hidden="true">2</span>
+              <h2 id="payment-title">Escolha a forma de pagamento</h2>
+            </div>
+
+            <div class="payment-option-pix" role="radio" aria-checked="true" aria-label="PIX, aprovação imediata">
+              <div class="payment-left">
+                <span class="radio-dot" aria-hidden="true"></span>
+                <div class="pix-badge-title">
+                  <svg class="pix-svg" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M348.6 448H163.4L64 348.6V163.4L163.4 64h185.2L448 163.4v185.2L348.6 448z" fill="#32BCAD" />
+                    <path d="M256 128l72 72-72 72-72-72 72-72zm0 128l72 72-72 72-72-72 72-72z" fill="#FFF" />
+                  </svg>
+                  PIX
                 </div>
-                <div class="order-summary-row total">
-                    <span>Total</span>
-                    <span style="color: #27ae60;">R$ 19,00</span>
-                </div>
+              </div>
+              <span class="pix-approval-tag">Aprovação imediata</span>
+            </div>
+
+            <div class="summary-box">
+              <div class="order-summary-row">
+                <span>Doce Liberdade - Acesso Vitalício</span>
+                <span>R$ 19,00</span>
+              </div>
+              <div class="order-summary-row total">
+                <span>Total</span>
+                <span>R$ 19,00</span>
+              </div>
             </div>
 
             <button type="submit" id="btn-submit" class="btn-submit-pay">
-                <span>Comprar agora</span> ➔
+              <span>Comprar agora</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
             </button>
+            <p class="button-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="18" height="11" x="3" y="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              Seus dados estão protegidos e não compartilhamos suas informações
+            </p>
+          </section>
 
-            <div class="secure-footer">
-                <div class="secure-badges">
-                    <span>🔒 Compra 100% Segura</span>
-                    <span>🛡️ Garantia de 7 Dias</span>
-                    <span>⚡ Acesso Imediato</span>
-                </div>
-                <p>Protegido por <strong>PinPay</strong>. O acesso à biblioteca será liberado no seu e-mail assim que o PIX for pago.</p>
+          <footer class="secure-footer">
+            <div class="secure-badges">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                Compra 100% Segura
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>
+                Garantia de 7 Dias
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.2h6.7L11 22l8.5-11.2h-6.7L13 2Z" /></svg>
+                Acesso Imediato
+              </span>
             </div>
-
+            <p>Protegido por <strong>PinPay</strong>. O acesso à biblioteca será liberado no seu e-mail assim que o PIX for pago.</p>
+          </footer>
         </form>
+      </div>
+    </main>
 
-    </div>
-
-    <!-- PIX MODAL RESULT -->
-    <div class="pix-modal-overlay" id="pix-modal">
-        <div class="pix-modal-card">
-            
-            <div id="pix-pending-content">
-                <h3>Escaneie o QR Code para pagar</h3>
-                <p style="font-size: 0.88rem; color: #718096; margin-top: 4px;">Abra o aplicativo do seu banco e escaneie o código abaixo:</p>
-
-                <img src="" alt="QR Code PIX PinPay" id="pix-qr-image" class="pix-qr-img">
-
-                <p style="font-size: 0.85rem; font-weight: 700; color: #2d3748; margin-bottom: 8px;">Ou copie o código PIX Copia e Cola:</p>
-                <div class="pix-code-box" id="pix-code-text"></div>
-
-                <button type="button" class="btn-copy-pix" id="btn-copy-code">
-                    📋 COPIAR CÓDIGO PIX
-                </button>
-                <div class="toast-msg" id="toast-copied">✓ Código PIX copiado com sucesso! Abra o app do banco e cole.</div>
-
-                <div class="status-badge-pulse" id="status-container">
-                    <div class="pulse-dot"></div>
-                    <span id="status-text">Aguardando confirmação do pagamento...</span>
-                </div>
-            </div>
-
-            <!-- SUCCESS CONTENT -->
-            <div class="paid-success-box" id="pix-success-content">
-                <div class="check-icon">✅</div>
-                <h3 style="color: #27ae60; font-size: 1.4rem;">Pagamento Confirmado!</h3>
-                <p style="font-size: 0.95rem; color: #4a5568; margin-top: 10px; line-height: 1.6;">
-                    Parabéns! Seu acesso à <strong>Biblioteca Doce Liberdade</strong> foi liberado com sucesso.<br>
-                    Enviamos os dados de acesso para o e-mail: <strong id="success-user-email"></strong>.
-                </p>
-            </div>
-
+    <div class="pix-modal-overlay" id="pix-modal" role="dialog" aria-modal="true" aria-labelledby="pix-modal-title">
+      <div class="pix-modal-card">
+        <div id="pix-pending-content">
+          <div class="modal-icon" aria-hidden="true">
+            <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M348.6 448H163.4L64 348.6V163.4L163.4 64h185.2L448 163.4v185.2L348.6 448z" fill="#32BCAD" /><path d="M256 128l72 72-72 72-72-72 72-72zm0 128l72 72-72 72-72-72 72-72z" fill="#FFF" /></svg>
+          </div>
+          <h3 id="pix-modal-title">Escaneie o QR Code para pagar</h3>
+          <p class="modal-lead">Abra o aplicativo do seu banco e escaneie o código abaixo:</p>
+          <img src="" alt="QR Code PIX PinPay" id="pix-qr-image" class="pix-qr-img" width="198" height="198" />
+          <p class="copy-label">Ou copie o código PIX Copia e Cola:</p>
+          <div class="pix-code-box" id="pix-code-text"></div>
+          <button type="button" class="btn-copy-pix" id="btn-copy-code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+            COPIAR CÓDIGO PIX
+          </button>
+          <div class="toast-msg" id="toast-copied" role="status">✓ Código PIX copiado com sucesso! Abra o app do banco e cole.</div>
+          <div class="status-badge-pulse" id="status-container" role="status">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span id="status-text">Aguardando confirmação do pagamento...</span>
+          </div>
         </div>
+
+        <div class="paid-success-box" id="pix-success-content">
+          <div class="check-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+          </div>
+          <h3>Pagamento Confirmado!</h3>
+          <p class="success-copy">Parabéns! Seu acesso à <strong>Biblioteca Doce Liberdade</strong> foi liberado com sucesso.<br />Enviamos os dados de acesso para o e-mail: <strong id="success-user-email"></strong>.</p>
+        </div>
+      </div>
     </div>
 
     <script>
-        const form = document.getElementById('checkout-form');
-        const btnSubmit = document.getElementById('btn-submit');
-        const pixModal = document.getElementById('pix-modal');
-        const pixQrImg = document.getElementById('pix-qr-image');
-        const pixCodeText = document.getElementById('pix-code-text');
-        const btnCopy = document.getElementById('btn-copy-code');
-        const toastCopied = document.getElementById('toast-copied');
-        const phoneInput = document.getElementById('phone');
-        const successUserEmail = document.getElementById('success-user-email');
+      const form = document.getElementById("checkout-form");
+      const btnSubmit = document.getElementById("btn-submit");
+      const pixModal = document.getElementById("pix-modal");
+      const pixQrImg = document.getElementById("pix-qr-image");
+      const pixCodeText = document.getElementById("pix-code-text");
+      const btnCopy = document.getElementById("btn-copy-code");
+      const toastCopied = document.getElementById("toast-copied");
+      const phoneInput = document.getElementById("phone");
+      const successUserEmail = document.getElementById("success-user-email");
+      const defaultButtonContent = btnSubmit.innerHTML;
 
-        let pollInterval = null;
+      let pollInterval = null;
 
-        // Auto phone mask (00) 00000-0000
-        phoneInput.addEventListener('input', (e) => {
-            let v = e.target.value.replace(/\D/g, '');
-            if (v.length > 11) v = v.substring(0, 11);
-            if (v.length > 6) {
-                e.target.value = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7)}`;
-            } else if (v.length > 2) {
-                e.target.value = `(${v.substring(0, 2)}) ${v.substring(2)}`;
-            } else {
-                e.target.value = v;
-            }
-        });
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = phoneInput.value.replace(/\D/g, '');
-
-            if (!name || !email || !phone) {
-                alert('Por favor, preencha todos os campos.');
-                return;
-            }
-
-            btnSubmit.disabled = true;
-            btnSubmit.innerHTML = 'Gerando PIX...';
-
-            try {
-                const response = await fetch('/api/pix', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, phone })
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data && data.pix && data.pix.qr_code) {
-                    pixQrImg.src = data.pix.qr_code_url;
-                    pixCodeText.textContent = data.pix.qr_code;
-                    successUserEmail.textContent = email;
-                    pixModal.classList.add('active');
-
-                    // Start live status polling
-                    startStatusPolling(data.id);
-                } else {
-                    const errMsg = data.error ? (data.error.message || data.error) : (data.message || 'Verifique os dados informados.');
-                    alert('Erro ao gerar PIX: ' + errMsg);
-                }
-            } catch (err) {
-                console.error(err);
-                alert('Erro de conexão ao gerar o PIX. Verifique sua internet.');
-            } finally {
-                btnSubmit.disabled = false;
-                btnSubmit.innerHTML = '<span>Comprar agora</span> ➔';
-            }
-        });
-
-        // Copy PIX Code
-        btnCopy.addEventListener('click', () => {
-            const code = pixCodeText.textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                toastCopied.style.display = 'block';
-                setTimeout(() => {
-                    toastCopied.style.display = 'none';
-                }, 3500);
-            });
-        });
-
-        // Realtime Status Polling
-        function startStatusPolling(id) {
-            if (pollInterval) clearInterval(pollInterval);
-            pollInterval = setInterval(async () => {
-                try {
-                    const res = await fetch(`/api/status?id=${id}`);
-                    const data = await res.json();
-
-                    if (data && (data.status === 'paid' || data.status === 'approved')) {
-                        clearInterval(pollInterval);
-                        document.getElementById('pix-pending-content').style.display = 'none';
-                        document.getElementById('pix-success-content').style.display = 'block';
-                    }
-                } catch (e) {
-                    console.log('Polling check...', e);
-                }
-            }, 3000);
+      phoneInput.addEventListener("input", (event) => {
+        let value = event.target.value.replace(/\D/g, "");
+        if (value.length > 11) value = value.substring(0, 11);
+        if (value.length > 6) {
+          event.target.value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7)}`;
+        } else if (value.length > 2) {
+          event.target.value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+        } else {
+          event.target.value = value;
         }
-    </script>
-</body>
+      });
 
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = phoneInput.value.replace(/\D/g, "");
+
+        if (!form.checkValidity() || !name || !email || !phone) {
+          form.reportValidity();
+          return;
+        }
+
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = "Gerando PIX...";
+
+        try {
+          const response = await fetch("/api/pix", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, phone })
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data && data.pix && data.pix.qr_code) {
+            pixQrImg.src = data.pix.qr_code_url;
+            pixCodeText.textContent = data.pix.qr_code;
+            successUserEmail.textContent = email;
+            pixModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+            btnCopy.focus();
+            startStatusPolling(data.id);
+          } else {
+            const errorMessage = data.error ? (data.error.message || data.error) : (data.message || "Verifique os dados informados.");
+            alert("Erro ao gerar PIX: " + errorMessage);
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Erro de conexão ao gerar o PIX. Verifique sua internet.");
+        } finally {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = defaultButtonContent;
+        }
+      });
+
+      btnCopy.addEventListener("click", async () => {
+        const code = pixCodeText.textContent;
+        try {
+          await navigator.clipboard.writeText(code);
+        } catch (error) {
+          const textArea = document.createElement("textarea");
+          textArea.value = code;
+          textArea.style.position = "fixed";
+          textArea.style.opacity = "0";
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand("copy");
+          textArea.remove();
+        }
+        toastCopied.style.display = "block";
+        setTimeout(() => { toastCopied.style.display = "none"; }, 3500);
+      });
+
+      function startStatusPolling(id) {
+        if (pollInterval) clearInterval(pollInterval);
+        pollInterval = setInterval(async () => {
+          try {
+            const response = await fetch(`/api/status?id=${encodeURIComponent(id)}`);
+            const data = await response.json();
+            if (data && (data.status === "paid" || data.status === "approved")) {
+              clearInterval(pollInterval);
+              document.getElementById("pix-pending-content").style.display = "none";
+              document.getElementById("pix-success-content").style.display = "block";
+            }
+          } catch (error) {
+            console.log("Polling check...", error);
+          }
+        }, 3000);
+      }
+    </script>
+  </body>
 </html>
