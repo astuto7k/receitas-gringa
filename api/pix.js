@@ -1,5 +1,6 @@
 const PINPAY_API_URL = 'https://api.usepinpay.com';
 const DEFAULT_PRODUCT_ID = '7c552d33-7f1e-4645-af68-8f82163a7f0c';
+const PRODUCT_AMOUNT_CENTS = 1900;
 
 function onlyDigits(value) {
   return String(value || '').replace(/\D/g, '');
@@ -117,6 +118,7 @@ export default async function handler(req, res) {
           },
         },
         userAgent: req.headers['user-agent'] || '',
+        customAmount: PRODUCT_AMOUNT_CENTS,
         bumpItems: [],
         shippingCents: 0,
         origin_url: checkoutOrigin,
