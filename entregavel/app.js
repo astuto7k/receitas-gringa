@@ -2,6 +2,7 @@
   'use strict';
 
   const recipes = Array.isArray(window.RECIPES) ? window.RECIPES : [];
+  const bonuses = Array.isArray(window.BONUSES) ? window.BONUSES : [];
   const meta = window.RECIPE_META || { categories: [], totals: {} };
   const categoryImages = {
     'Sobremesas e Doces': '../images/cat_sobremesas.jpg',
@@ -15,6 +16,10 @@
 
   const elements = {
     categoryGrid: document.getElementById('category-grid'),
+    bonusGrid: document.getElementById('bonus-grid'),
+    bonusSection: document.getElementById('bonus-section'),
+    recipeTotal: document.getElementById('recipe-total'),
+    categoryTotal: document.getElementById('category-total'),
     recipeGrid: document.getElementById('recipe-grid'),
     search: document.getElementById('recipe-search'),
     clearSearch: document.querySelector('[data-action="clear-search"]'),
@@ -25,8 +30,10 @@
     loadMore: document.getElementById('load-more'),
     favoriteCount: document.getElementById('favorite-count'),
     dialog: document.getElementById('recipe-dialog'),
+    bonusDialog: document.getElementById('bonus-dialog'),
     dialogBackdrop: document.getElementById('dialog-backdrop'),
     detail: document.getElementById('recipe-detail'),
+    bonusDetail: document.getElementById('bonus-detail'),
     toast: document.getElementById('toast'),
     installButton: document.querySelector('[data-action="install"]')
   };
@@ -106,6 +113,115 @@
     `).join('');
   }
 
+  function renderBonuses() {
+    elements.bonusGrid.innerHTML = bonuses.map((bonus) => `
+      <article class="bonus-card bonus-card--${escapeHTML(bonus.theme)}">
+        <div class="bonus-cover" aria-hidden="true">
+          <span class="bonus-number">BÔNUS ${bonus.number}</span>
+          <span class="bonus-icon">${escapeHTML(bonus.icon)}</span>
+          <strong>${escapeHTML(bonus.title)}</strong>
+          <small>${escapeHTML(bonus.subtitle)}</small>
+        </div>
+        <div class="bonus-card-body">
+          <span class="eyebrow">${escapeHTML(bonus.label)}</span>
+          <h3>${escapeHTML(bonus.title)}</h3>
+          <p>${escapeHTML(bonus.description)}</p>
+          <button class="bonus-open-button" type="button" data-bonus="${escapeHTML(bonus.id)}">Abrir bônus <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  function readBonusTracker(id) {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(`doce-liberdade-bonus-${id}`) || '[]'));
+    } catch {
+      return new Set();
+    }
+  }
+
+  function renderBonusSection(section, bonus) {
+    const tracker = readBonusTracker(bonus.id);
+    return `
+      <section class="bonus-content-section">
+        <h3>${escapeHTML(section.title)}</h3>
+        ${(section.paragraphs || []).map((paragraph) => `<p>${escapeHTML(paragraph)}</p>`).join('')}
+        ${section.alert ? `<div class="bonus-alert"><strong>Atenção</strong><span>${escapeHTML(section.alert)}</span></div>` : ''}
+        ${section.ingredients ? `<h4>Ingredientes</h4><ul class="bonus-list">${section.ingredients.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul>` : ''}
+        ${section.steps ? `<h4>Modo de preparo</h4><ol class="bonus-steps">${section.steps.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ol>` : ''}
+        ${section.cards ? `<div class="attention-grid">${section.cards.map((card) => `<article><strong>${escapeHTML(card.title)}</strong><p>${escapeHTML(card.text)}</p></article>`).join('')}</div>` : ''}
+        ${section.bullets ? `<ul class="bonus-list">${section.bullets.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul>` : ''}
+        ${section.checklist ? `<div class="bonus-checklist">${section.checklist.map((item) => `<div><span aria-hidden="true">✓</span><p>${escapeHTML(item)}</p></div>`).join('')}</div>` : ''}
+        ${section.tracker ? `<div class="tracker-wrap"><div class="tracker-heading"><strong>Meu acompanhamento</strong><span>Marque cada dia concluído</span></div><div class="tracker-grid">${Array.from({ length: 14 }, (_, index) => { const day = index + 1; const checked = tracker.has(day); return `<label class="tracker-day${checked ? ' is-checked' : ''}"><input type="checkbox" data-bonus-track="${day}" ${checked ? 'checked' : ''}><span>${checked ? '✓' : day}</span><small>Dia ${day}</small></label>`; }).join('')}</div></div>` : ''}
+        ${section.note ? `<div class="bonus-note">${escapeHTML(section.note)}</div>` : ''}
+      </section>
+    `;
+  }
+
+  function renderBonusDetail(id) {
+    const bonus = bonuses.find((item) => item.id === id);
+    if (!bonus) return;
+    const recipeContent = (bonus.recipes || []).length ? `
+      <section class="bonus-content-section">
+        <div class="bonus-recipes-heading"><div><span class="eyebrow">Caderno de receitas</span><h3>${bonus.recipes.length} preparações</h3></div><span>${bonus.recipes.length}</span></div>
+        <div class="bonus-recipe-list">${bonus.recipes.map((recipe, index) => `
+          <details class="bonus-recipe">
+            <summary><span class="bonus-recipe-number">${String(index + 1).padStart(2, '0')}</span><span><strong>${escapeHTML(recipe.name)}</strong><small>${escapeHTML(recipe.time)} · ${escapeHTML(recipe.servings)}</small></span><b aria-hidden="true">+</b></summary>
+            <div class="bonus-recipe-body"><h4>Ingredientes</h4><ul>${recipe.ingredients.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ul><h4>Modo de preparo</h4><ol>${recipe.steps.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}</ol></div>
+          </details>
+        `).join('')}</div>
+      </section>
+    ` : '';
+
+    elements.bonusDetail.innerHTML = `
+      <div class="bonus-detail-hero bonus-detail-hero--${escapeHTML(bonus.theme)}">
+        <button class="dialog-close" type="button" data-action="close-bonus" aria-label="Fechar bônus">×</button>
+        <span class="bonus-detail-number">Bônus ${bonus.number}</span>
+        <span class="bonus-detail-icon" aria-hidden="true">${escapeHTML(bonus.icon)}</span>
+        <div><span class="eyebrow">${escapeHTML(bonus.label)}</span><h2 id="bonus-dialog-title">${escapeHTML(bonus.title)}</h2><p>${escapeHTML(bonus.subtitle)}</p></div>
+      </div>
+      <div class="detail-body bonus-detail-body">
+        ${bonus.sections.map((section) => renderBonusSection(section, bonus)).join('')}
+        ${recipeContent}
+        <section class="bonus-sources"><h3>Referências do material</h3><p>O conteúdo completo está dentro do aplicativo e foi preparado para revisão da nutricionista responsável.</p>${bonus.sources.map((source) => `<div class="bonus-source-row">${escapeHTML(source.label)}</div>`).join('')}</section>
+      </div>
+    `;
+  }
+
+  function openBonus(id, { updateHash = true } = {}) {
+    renderBonusDetail(id);
+    if (!elements.bonusDialog.open) {
+      if (typeof elements.bonusDialog.showModal === 'function') elements.bonusDialog.showModal();
+      else {
+        elements.bonusDialog.setAttribute('open', '');
+        elements.bonusDialog.classList.add('is-fallback');
+        elements.dialogBackdrop.hidden = false;
+        document.body.classList.add('modal-open');
+      }
+    }
+    if (updateHash) history.replaceState(null, '', `#bonus-${id}`);
+  }
+
+  function closeBonus() {
+    if (elements.bonusDialog.open) {
+      if (typeof elements.bonusDialog.close === 'function') elements.bonusDialog.close();
+      else elements.bonusDialog.removeAttribute('open');
+    }
+    elements.bonusDialog.classList.remove('is-fallback');
+    elements.dialogBackdrop.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (location.hash.startsWith('#bonus-')) history.replaceState(null, '', `${location.pathname}${location.search}`);
+  }
+
+  function setActiveNav(action) {
+    document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('is-active', item.dataset.action === action));
+  }
+
+  function showBonuses() {
+    setActiveNav('bonuses');
+    elements.bonusSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   function renderRecipes({ keepPosition = true } = {}) {
     const currentY = window.scrollY;
     const result = filteredRecipes();
@@ -155,9 +271,7 @@
     document.querySelectorAll('.filter-chip').forEach((chip) => {
       chip.classList.toggle('is-active', chip.dataset.filter === state.quickFilter);
     });
-    document.querySelectorAll('.nav-item').forEach((item) => {
-      item.classList.toggle('is-active', state.favoritesOnly ? item.dataset.action === 'favorites' : item.dataset.action === 'home');
-    });
+    setActiveNav(state.favoritesOnly ? 'favorites' : 'home');
 
     if (keepPosition) window.scrollTo({ top: currentY });
   }
@@ -343,6 +457,9 @@
     const recipeButton = event.target.closest('[data-recipe]');
     if (recipeButton) return openRecipe(Number(recipeButton.dataset.recipe));
 
+    const bonusButton = event.target.closest('[data-bonus]');
+    if (bonusButton) return openBonus(bonusButton.dataset.bonus);
+
     const favorite = event.target.closest('[data-favorite]');
     if (favorite) return toggleFavorite(Number(favorite.dataset.favorite));
 
@@ -364,11 +481,13 @@
     if (action === 'home') goHome();
     if (action === 'show-all') setCategory('Todas');
     if (action === 'focus-search') { elements.search.focus(); elements.search.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    if (action === 'bonuses') showBonuses();
     if (action === 'favorites') showFavorites();
     if (action === 'clear-search') { state.query = ''; elements.search.value = ''; renderRecipes(); elements.search.focus(); }
     if (action === 'reset-filters') resetFilters();
     if (action === 'load-more') { state.visible += 36; renderRecipes(); }
     if (action === 'close-detail') closeDetail();
+    if (action === 'close-bonus') closeBonus();
     if (action === 'copy-ingredients') copyIngredients();
     if (action === 'share') shareRecipe();
     if (action === 'print') window.print();
@@ -390,6 +509,29 @@
   elements.dialog.addEventListener('cancel', (event) => {
     event.preventDefault();
     closeDetail();
+  });
+
+  elements.bonusDialog.addEventListener('click', (event) => {
+    if (event.target === elements.bonusDialog) closeBonus();
+  });
+
+  elements.bonusDialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeBonus();
+  });
+
+  elements.bonusDialog.addEventListener('change', (event) => {
+    const input = event.target.closest('[data-bonus-track]');
+    if (!input) return;
+    const bonus = bonuses.find((item) => location.hash === `#bonus-${item.id}`);
+    if (!bonus) return;
+    const progress = readBonusTracker(bonus.id);
+    const day = Number(input.dataset.bonusTrack);
+    if (input.checked) progress.add(day); else progress.delete(day);
+    localStorage.setItem(`doce-liberdade-bonus-${bonus.id}`, JSON.stringify([...progress]));
+    input.closest('.tracker-day')?.classList.toggle('is-checked', input.checked);
+    const marker = input.nextElementSibling;
+    if (marker) marker.textContent = input.checked ? '✓' : day;
   });
 
   window.addEventListener('beforeinstallprompt', (event) => {
@@ -416,18 +558,27 @@
     const match = location.hash.match(/^#receita-(\d+)$/);
     if (match) openRecipe(Number(match[1]), { updateHash: false });
     else closeDetail();
+    const bonusMatch = location.hash.match(/^#bonus-(.+)$/);
+    if (bonusMatch) openBonus(bonusMatch[1], { updateHash: false });
+    else if (elements.bonusDialog.open) closeBonus();
   });
 
   function init() {
-    if (recipes.length !== 500) {
+    const uniqueRecipeIds = new Set(recipes.map((recipe) => recipe.id));
+    if (recipes.length !== 500 || uniqueRecipeIds.size !== 500 || bonuses.length !== 3) {
       document.body.innerHTML = '<main style="padding:24px;font-family:system-ui"><h1>Não foi possível carregar a biblioteca.</h1><p>Atualize a página para tentar novamente.</p></main>';
       return;
     }
     renderCategories();
+    renderBonuses();
+    elements.recipeTotal.textContent = recipes.length;
+    elements.categoryTotal.textContent = meta.categories.length;
     updateFavoriteCount();
     renderRecipes({ keepPosition: false });
     const match = location.hash.match(/^#receita-(\d+)$/);
     if (match) openRecipe(Number(match[1]), { updateHash: false });
+    const bonusMatch = location.hash.match(/^#bonus-(.+)$/);
+    if (bonusMatch) openBonus(bonusMatch[1], { updateHash: false });
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
       navigator.serviceWorker.register('sw.js').catch(() => {});
     }

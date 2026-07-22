@@ -1,10 +1,11 @@
-const CACHE = 'doce-liberdade-v1';
+const CACHE = 'doce-liberdade-v5-bonus-destaque';
 const APP_FILES = [
   './',
   './index.html',
   './styles.css',
   './app.js',
   './recipes.js',
+  './bonuses.js',
   './manifest.webmanifest',
   './assets/icon.svg',
   '../images/cat_sobremesas.jpg',

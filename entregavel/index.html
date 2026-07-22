@@ -8,7 +8,7 @@
   <title>Doce Liberdade — Biblioteca de Receitas</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -33,8 +33,8 @@
         <p>Encontre receitas por nome, ingrediente ou categoria.</p>
       </div>
       <div class="collection-stats" aria-label="Resumo da biblioteca">
-        <div><strong>500</strong><span>receitas</span></div>
-        <div><strong>7</strong><span>categorias</span></div>
+        <div><strong id="recipe-total">500</strong><span>receitas</span></div>
+        <div><strong id="category-total">7</strong><span>categorias</span></div>
       </div>
     </section>
 
@@ -46,12 +46,31 @@
       </label>
     </section>
 
+    <section class="bonus-callout" aria-label="Seus bônus liberados">
+      <div class="bonus-callout-icon" aria-hidden="true">✦</div>
+      <div class="bonus-callout-copy">
+        <span>Incluídos no seu acesso</span>
+        <h2>Você também recebeu 3 bônus</h2>
+        <p>Chá Dourado, Lista Negra e Receitas Metabólicas.</p>
+      </div>
+      <button type="button" data-action="bonuses">VER MEUS BÔNUS <span aria-hidden="true">→</span></button>
+    </section>
+
     <section class="categories-section" aria-labelledby="categories-title">
       <div class="section-heading">
         <div><span class="eyebrow">Explore</span><h2 id="categories-title">As 7 categorias</h2></div>
         <button class="text-button" type="button" data-action="show-all">Ver todas</button>
       </div>
       <div id="category-grid" class="category-grid"></div>
+    </section>
+
+    <section id="bonus-section" class="bonus-section" aria-labelledby="bonus-title">
+      <div class="section-heading bonus-heading">
+        <div><span class="eyebrow">Incluídos gratuitamente</span><h2 id="bonus-title">Seus 3 bônus estão liberados</h2></div>
+        <span class="bonus-badge">Liberados</span>
+      </div>
+      <p class="section-intro">Todos os conteúdos abaixo fazem parte do seu acesso. Toque em “Abrir bônus” para ler dentro do aplicativo.</p>
+      <div id="bonus-grid" class="bonus-grid"></div>
     </section>
 
     <section class="library-section" aria-labelledby="library-title">
@@ -87,6 +106,7 @@
   <nav class="bottom-nav" aria-label="Navegação principal">
     <button class="nav-item is-active" type="button" data-action="home"><span aria-hidden="true">⌂</span><span>Início</span></button>
     <button class="nav-item" type="button" data-action="focus-search"><span aria-hidden="true">⌕</span><span>Buscar</span></button>
+    <button class="nav-item nav-item--bonus" type="button" data-action="bonuses"><span aria-hidden="true">✦</span><span>Bônus</span><b class="bonus-nav-count">3</b></button>
     <button class="nav-item" type="button" data-action="favorites"><span aria-hidden="true">♡</span><span>Favoritos</span><b id="favorite-count" hidden>0</b></button>
   </nav>
 
@@ -95,9 +115,14 @@
     <div id="recipe-detail" class="recipe-detail"></div>
   </dialog>
 
+  <dialog id="bonus-dialog" class="recipe-dialog bonus-dialog" aria-labelledby="bonus-dialog-title">
+    <div id="bonus-detail" class="recipe-detail"></div>
+  </dialog>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="recipes.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="recipes.js?v=500" defer></script>
+  <script src="bonuses.js?v=1" defer></script>
+  <script src="app.js?v=3" defer></script>
 </body>
 </html>
