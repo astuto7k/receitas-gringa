@@ -434,7 +434,26 @@
         .testimonial-slide-card .author {
             font-weight: 700;
             color: #D4851C;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
+            margin: 0;
+        }
+
+        .testimonial-author-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #D4851C;
+            flex-shrink: 0;
         }
 
         .slider-hint {
@@ -564,15 +583,17 @@
 
         .bonus-card img {
             width: 100%;
+            display: block;
         }
 
         .bonus-card .bonus-info {
-            padding: 16px;
+            padding: 8px 14px 14px;
         }
 
         .bonus-card h3 {
             font-size: 0.95rem;
-            margin-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 6px;
             color: #f0d0a0;
             font-weight: 700;
         }
@@ -959,7 +980,7 @@
             <h2>Mais de 500 receitas organizadas por categorias</h2>
             <div class="cat-grid">
                 <div class="cat-card">
-                    <img src="images/4.jpg" alt="Sobremesas e Doces">
+                    <img src="images/cat_sobremesas.jpg" alt="Sobremesas e Doces">
                     <div class="cat-card-content">
                         <h3>Sobremesas e Doces</h3>
                         <ul>
@@ -973,7 +994,7 @@
                     </div>
                 </div>
                 <div class="cat-card">
-                    <img src="images/11111.jpg" alt="Panificação de Verdade">
+                    <img src="images/cat_panificacao.jpg" alt="Panificação de Verdade">
                     <div class="cat-card-content">
                         <h3>Panificação de Verdade</h3>
                         <ul>
@@ -1066,140 +1087,240 @@
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Achei que nunca mais comeria doces sem medo. Agora sei exatamente o quanto posso
                             comer."</blockquote>
-                        <p class="author">Laura M., São Paulo</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" alt="Laura M." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Laura M., São Paulo</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 2 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Me ajudou a entender que o problema não era só o açúcar. Aprendi a controlar minhas
                             porções e reduzir picos de glicose."</blockquote>
-                        <p class="author">José R., Rio de Janeiro</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="José R." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">José R., Rio de Janeiro</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 3 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"A melhor parte é que minha família inteira come as mesmas coisas que eu. Não me
                             sinto mais excluído nas sobremesas."</blockquote>
-                        <p class="author">Mariana G., Belo Horizonte</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80" alt="Mariana G." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Mariana G., Belo Horizonte</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 4 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Os pães são sensacionais. O miolo é fofinho e o sabor é exatamente igual ao
                             tradicional. Minha glicose agradece!"</blockquote>
-                        <p class="author">Cláudio S., Porto Alegre</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="Cláudio S." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Cláudio S., Porto Alegre</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 5 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Fazer pudim sem açúcar que não fica aguado parecia milagre. Essa técnica parisiense
                             realmente funciona."</blockquote>
-                        <p class="author">Beatriz F., Curitiba</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Beatriz F." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Beatriz F., Curitiba</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 6 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Minha filha é diabética tipo 1 e sofria muito nas festas. Hoje faço os bolos e
                             cookies para ela e ela ama de paixão."</blockquote>
-                        <p class="author">Renata L., Campinas</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80" alt="Renata L." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Renata L., Campinas</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 7 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Comprei com receio, mas a lista de compras automática salvou minha rotina. Receitas
                             deliciosas e práticas!"</blockquote>
-                        <p class="author">Fernando M., Brasília</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&auto=format&fit=crop&q=80" alt="Fernando M." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Fernando M., Brasília</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 8 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Perdi 6kg trocando os doces tradicionais pelos funcionais da biblioteca. O brownie
                             de chocolate é indescritível."</blockquote>
-                        <p class="author">Juliana K., Salvador</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80" alt="Juliana K." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Juliana K., Salvador</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 9 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Finalmente voltei a comer pão de forma com café sem ver a glicose subir a 200.
                             Estou muito mais feliz."</blockquote>
-                        <p class="author">Arnaldo T., Florianópolis</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80" alt="Arnaldo T." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Arnaldo T., Florianópolis</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 10 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"A calculadora de porções ajuda demais a manter o equilíbrio. Muito fácil de usar no
                             celular!"</blockquote>
-                        <p class="author">Patrícia V., Recife</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80" alt="Patrícia V." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Patrícia V., Recife</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 11 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"A receita de baguete saudável é crocante por fora e macia por dentro. Lembra os
                             melhores pães que comi na França."</blockquote>
-                        <p class="author">Gabriel H., Vitória</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80" alt="Gabriel H." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Gabriel H., Vitória</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 12 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Tenho restrição severa ao glúten e açúcar. Essa biblioteca foi a salvação para os
                             meus finais de semana em família."</blockquote>
-                        <p class="author">Aline D., Goiânia</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80" alt="Aline D." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Aline D., Goiânia</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 13 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Minha glicose de jejum caiu de 145 para 98 em menos de um mês usando as receitas.
                             Super indico!"</blockquote>
-                        <p class="author">Luiz C., Manaus</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80" alt="Luiz C." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Luiz C., Manaus</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 14 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"O cheesecake de frutas vermelhas virou a sobremesa oficial de domingo em casa.
                             Ninguém diz que é sem açúcar."</blockquote>
-                        <p class="author">Camila P., Natal</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&auto=format&fit=crop&q=80" alt="Camila P." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Camila P., Natal</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 15 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Fácil, rápido e realmente barato de fazer. Não precisa de ingredientes mirabolantes
                             e caros."</blockquote>
-                        <p class="author">Ricardo J., Fortaleza</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80" alt="Ricardo J." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Ricardo J., Fortaleza</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 16 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Os cookies derretem na boca! Meus filhos adoraram e agora comem sobremesa saudável
                             sem perceber."</blockquote>
-                        <p class="author">Luciana O., Sorocaba</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=150&auto=format&fit=crop&q=80" alt="Luciana O." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Luciana O., Sorocaba</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 17 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Excelente material. O chá dourado regulou minha digestão e me deu muito mais
                             energia no dia a dia."</blockquote>
-                        <p class="author">Marcos R., Santos</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150&auto=format&fit=crop&q=80" alt="Marcos R." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Marcos R., Santos</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 18 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Parece mentira comer doce sem sentir culpa ou medo. A Chef Patrícia trouxe a
                             confeitaria de Paris para nós."</blockquote>
-                        <p class="author">Sofia W., Niterói</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150&auto=format&fit=crop&q=80" alt="Sofia W." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Sofia W., Niterói</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 19 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"O aplicativo no celular funciona perfeitamente. Uso direto na cozinha enquanto
                             preparo as receitas."</blockquote>
-                        <p class="author">Sônia G., Londrina</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1548142813-c348350df52b?w=150&auto=format&fit=crop&q=80" alt="Sônia G." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Sônia G., Londrina</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Card 20 -->
                     <div class="testimonial-slide-card">
                         <div class="rating">⭐⭐⭐⭐⭐</div>
                         <blockquote>"Melhor investimento para a minha saúde. Comer bem é viver melhor. Recomendo a todos
                             os diabéticos!"</blockquote>
-                        <p class="author">Valdir B., Joinville</p>
+                        <div class="testimonial-author-wrapper">
+                            <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=150&auto=format&fit=crop&q=80" alt="Valdir B." class="testimonial-avatar">
+                            <div class="testimonial-author-info">
+                                <p class="author">Valdir B., Joinville</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1350,8 +1471,8 @@
                 <div class="faq-question">Como recebo o acesso?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        Assim que seu pagamento for confirmado, a Hotmart enviará automaticamente um e-mail com os
-                        detalhes de acesso ao aplicativo. Basta verificar sua caixa de entrada (e a pasta de spam, se
+                        Assim que seu pagamento for confirmado, nosso suporte enviará automaticamente um e-mail com todo o material
+                         Basta verificar sua caixa de entrada (e a pasta de spam, se
                         necessário), e você poderá acessar imediatamente.
                     </div>
                 </div>
@@ -1368,9 +1489,8 @@
                 <div class="faq-question">Como faço o pagamento?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        O pagamento é processado de forma 100% segura através da Hotmart, uma das plataformas digitais
-                        mais reconhecidas e confiáveis do mercado. Você pode pagar com cartão de crédito, débito e
-                        outros métodos disponíveis dependendo do seu país.
+                        O pagamento é processado de forma 100% segura através da Lowify, uma das plataformas digitais
+                        mais reconhecidas e confiáveis do mercado brasileiro e mundial. 
                     </div>
                 </div>
             </div>
