@@ -854,6 +854,16 @@
             </div>
 
             <div class="form-group">
+              <label for="cpf">CPF</label>
+              <div class="field-wrap">
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="20" height="14" x="2" y="5" rx="2" /><path d="M6 9h4M6 13h6M16 10h2M16 14h2" />
+                </svg>
+                <input type="text" id="cpf" class="form-control" placeholder="000.000.000-00" autocomplete="off" inputmode="numeric" maxlength="14" required />
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="phone">Celular com DDD</label>
               <div class="field-wrap">
                 <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -970,11 +980,42 @@
       const pixCodeText = document.getElementById("pix-code-text");
       const btnCopy = document.getElementById("btn-copy-code");
       const toastCopied = document.getElementById("toast-copied");
+      const cpfInput = document.getElementById("cpf");
       const phoneInput = document.getElementById("phone");
+      const statusText = document.getElementById("status-text");
       const successUserEmail = document.getElementById("success-user-email");
       const defaultButtonContent = btnSubmit.innerHTML;
 
       let pollInterval = null;
+
+      function isValidCpf(value) {
+        const cpf = value.replace(/\D/g, "");
+        if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+        const digit = (length) => {
+          let sum = 0;
+          for (let index = 0; index < length; index += 1) {
+            sum += Number(cpf[index]) * (length + 1 - index);
+          }
+          const remainder = (sum * 10) % 11;
+          return remainder === 10 ? 0 : remainder;
+        };
+
+        return digit(9) === Number(cpf[9]) && digit(10) === Number(cpf[10]);
+      }
+
+      cpfInput.addEventListener("input", (event) => {
+        let value = event.target.value.replace(/\D/g, "").substring(0, 11);
+        if (value.length > 9) {
+          value = `${value.substring(0, 3)}.${value.substring(3, 6)}.${value.substring(6, 9)}-${value.substring(9)}`;
+        } else if (value.length > 6) {
+          value = `${value.substring(0, 3)}.${value.substring(3, 6)}.${value.substring(6)}`;
+        } else if (value.length > 3) {
+          value = `${value.substring(0, 3)}.${value.substring(3)}`;
+        }
+        event.target.value = value;
+        event.target.setCustomValidity("");
+      });
 
       phoneInput.addEventListener("input", (event) => {
         let value = event.target.value.replace(/\D/g, "");
@@ -993,9 +1034,14 @@
 
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
+        const cpf = cpfInput.value.replace(/\D/g, "");
         const phone = phoneInput.value.replace(/\D/g, "");
 
-        if (!form.checkValidity() || !name || !email || !phone) {
+        if (!isValidCpf(cpf)) {
+          cpfInput.setCustomValidity("Informe um CPF válido.");
+        }
+
+        if (!form.checkValidity() || !name || !email || !cpf || !phone) {
           form.reportValidity();
           return;
         }
@@ -1007,15 +1053,17 @@
           const response = await fetch("/api/pix", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, phone })
+            body: JSON.stringify({ name, email, phone, cpf, originUrl: window.location.href })
           });
 
           const data = await response.json();
 
           if (response.ok && data && data.pix && data.pix.qr_code) {
-            pixQrImg.src = data.pix.qr_code_url;
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(data.pix.qr_code)}`;
+            pixQrImg.src = qrCodeUrl;
             pixCodeText.textContent = data.pix.qr_code;
             successUserEmail.textContent = email;
+            statusText.textContent = "Aguardando confirmação do pagamento...";
             pixModal.classList.add("active");
             document.body.style.overflow = "hidden";
             btnCopy.focus();
@@ -1053,18 +1101,32 @@
 
       function startStatusPolling(id) {
         if (pollInterval) clearInterval(pollInterval);
+        let attempts = 0;
         pollInterval = setInterval(async () => {
+          attempts += 1;
+          if (attempts > 240) {
+            clearInterval(pollInterval);
+            statusText.textContent = "Atualize a página para consultar novamente.";
+            return;
+          }
+
           try {
             const response = await fetch(`/api/status?id=${encodeURIComponent(id)}`);
+            if (!response.ok) return;
             const data = await response.json();
-            if (data && (data.status === "paid" || data.status === "approved")) {
+            const status = String(data?.status || "").toLowerCase();
+
+            if (["paid", "approved", "completed"].includes(status)) {
               clearInterval(pollInterval);
               document.getElementById("pix-pending-content").style.display = "none";
               document.getElementById("pix-success-content").style.display = "block";
+            } else if (["expired", "failed", "refunded", "chargeback"].includes(status)) {
+              clearInterval(pollInterval);
+              statusText.textContent = status === "expired"
+                ? "Este PIX expirou. Atualize a página para gerar outro."
+                : "Não foi possível confirmar este pagamento.";
             }
-          } catch (error) {
-            console.log("Polling check...", error);
-          }
+          } catch (error) {}
         }, 3000);
       }
     </script>

@@ -1444,6 +1444,16 @@
             tick();
         }
         startCountdown();
+
+        // Preserve campaign attribution when the visitor leaves the landing page.
+        const attributionParams = new URLSearchParams(window.location.search);
+        if (attributionParams.size > 0) {
+            document.querySelectorAll('a[href^="checkout.html"]').forEach(link => {
+                const destination = new URL(link.getAttribute('href'), window.location.href);
+                attributionParams.forEach((value, key) => destination.searchParams.set(key, value));
+                link.href = `${destination.pathname}${destination.search}${destination.hash}`;
+            });
+        }
     </script>
 
 
