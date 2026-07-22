@@ -590,6 +590,11 @@
             padding: 8px 14px 14px;
         }
 
+        .bonus-card--list .bonus-info {
+            position: relative;
+            margin-top: -48px;
+        }
+
         .bonus-card h3 {
             font-size: 0.95rem;
             margin-top: 0;
@@ -1082,8 +1087,8 @@
             <h2>O que as pessoas estão dizendo</h2>
 
             <div class="press-images">
-                <img src="images/newspaper_chef.jpg" alt="Le Journal Mondial - Chefe Patrícia" class="press-img">
                 <img src="images/hero_chef.jpg" alt="Chefe Premiada em Paris" class="press-img">
+                <img src="images/newspaper_chef.jpg" alt="Le Journal Mondial - Chefe Patrícia" class="press-img">
             </div>
 
             <!-- TESTIMONIALS SLIDER -->
@@ -1392,7 +1397,7 @@
                         <p class="bonus-free">GRÁTIS!</p>
                     </div>
                 </div>
-                <div class="bonus-card">
+                <div class="bonus-card bonus-card--list">
                     <img src="images/B2.png" alt="Lista Negra de Medicamentos">
                     <div class="bonus-info">
                         <h3>A lista negra de medicamentos e suplementos que mais aumentam a glicose no sangue — e que a
@@ -1551,16 +1556,9 @@
             }
         }
 
-        // Countdown Timer (15 minutes loop)
+        // Countdown Timer (15 minutes from each page entry)
         function startCountdown() {
             var totalSeconds = 15 * 60;
-            var saved = sessionStorage.getItem('cs_countdown');
-            if (saved) {
-                var elapsed = Math.floor((Date.now() - parseInt(saved)) / 1000);
-                totalSeconds = Math.max(0, 15 * 60 - elapsed);
-            } else {
-                sessionStorage.setItem('cs_countdown', Date.now().toString());
-            }
             function tick() {
                 var m = Math.floor(totalSeconds / 60);
                 var s = totalSeconds % 60;
