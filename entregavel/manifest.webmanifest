@@ -1,0 +1,18 @@
+{
+  "name": "Doce Liberdade — Biblioteca de Receitas",
+  "short_name": "Doce Liberdade",
+  "description": "500 receitas organizadas em 7 categorias.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f1e8",
+  "theme_color": "#f6f1e8",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f1e8">
+  <meta name="description" content="Biblioteca Doce Liberdade com 500 receitas organizadas em 7 categorias.">
+  <title>Doce Liberdade — Biblioteca de Receitas</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <button class="brand" type="button" data-action="home" aria-label="Ir para o início">
+        <span class="brand-mark" aria-hidden="true">DL</span>
+        <span class="brand-copy"><strong>Doce Liberdade</strong><small>Minha biblioteca</small></span>
+      </button>
+      <button class="icon-button install-button" type="button" data-action="install" hidden>
+        <span aria-hidden="true">↓</span><span>Instalar</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo" class="app-shell">
+    <section class="welcome-card" aria-labelledby="welcome-title">
+      <div class="welcome-content">
+        <span class="eyebrow">Seu acesso está liberado</span>
+        <h1 id="welcome-title">O que você quer preparar hoje?</h1>
+        <p>Encontre receitas por nome, ingrediente ou categoria.</p>
+      </div>
+      <div class="collection-stats" aria-label="Resumo da biblioteca">
+        <div><strong>500</strong><span>receitas</span></div>
+        <div><strong>7</strong><span>categorias</span></div>
+      </div>
+    </section>
+
+    <section class="search-section" aria-label="Busca de receitas">
+      <label class="search-box" for="recipe-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
+        <input id="recipe-search" type="search" inputmode="search" autocomplete="off" placeholder="Busque bolo, pão, frango…">
+        <button class="clear-search" type="button" data-action="clear-search" aria-label="Limpar busca" hidden>×</button>
+      </label>
+    </section>
+
+    <section class="categories-section" aria-labelledby="categories-title">
+      <div class="section-heading">
+        <div><span class="eyebrow">Explore</span><h2 id="categories-title">As 7 categorias</h2></div>
+        <button class="text-button" type="button" data-action="show-all">Ver todas</button>
+      </div>
+      <div id="category-grid" class="category-grid"></div>
+    </section>
+
+    <section class="library-section" aria-labelledby="library-title">
+      <div class="section-heading results-heading">
+        <div><span id="results-kicker" class="eyebrow">Biblioteca completa</span><h2 id="library-title">Todas as receitas</h2></div>
+        <span id="result-count" class="result-count" aria-live="polite"></span>
+      </div>
+
+      <div class="filter-scroller" aria-label="Filtros rápidos">
+        <button class="filter-chip is-active" type="button" data-filter="Todos">Todos</button>
+        <button class="filter-chip" type="button" data-filter="Até 30 min">Até 30 min</button>
+        <button class="filter-chip" type="button" data-filter="Sem trigo">Sem trigo</button>
+        <button class="filter-chip" type="button" data-filter="Sem lactose">Sem lactose</button>
+        <button class="filter-chip" type="button" data-filter="Vegetariana">Vegetarianas</button>
+      </div>
+
+      <div id="recipe-grid" class="recipe-grid" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <span aria-hidden="true">⌕</span>
+        <h3>Nenhuma receita encontrada</h3>
+        <p>Tente outro ingrediente ou remova os filtros.</p>
+        <button class="primary-button" type="button" data-action="reset-filters">Limpar filtros</button>
+      </div>
+      <button id="load-more" class="load-more" type="button" data-action="load-more" hidden>Mostrar mais receitas</button>
+    </section>
+
+    <aside class="care-note">
+      <span class="care-icon" aria-hidden="true">♡</span>
+      <div><strong>Uma observação importante</strong><p>“Sem açúcar adicionado” não significa ausência de carboidratos. Porções e resposta glicêmica variam. Ajuste as receitas com sua nutricionista ou equipe de saúde.</p></div>
+    </aside>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navegação principal">
+    <button class="nav-item is-active" type="button" data-action="home"><span aria-hidden="true">⌂</span><span>Início</span></button>
+    <button class="nav-item" type="button" data-action="focus-search"><span aria-hidden="true">⌕</span><span>Buscar</span></button>
+    <button class="nav-item" type="button" data-action="favorites"><span aria-hidden="true">♡</span><span>Favoritos</span><b id="favorite-count" hidden>0</b></button>
+  </nav>
+
+  <div id="dialog-backdrop" class="dialog-backdrop" data-action="close-detail" hidden></div>
+  <dialog id="recipe-dialog" class="recipe-dialog" aria-labelledby="dialog-title">
+    <div id="recipe-detail" class="recipe-detail"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="recipes.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
